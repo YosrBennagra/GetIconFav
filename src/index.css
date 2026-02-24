@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Checkerboard pattern for transparency preview ─────────────── */
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, #27272a 25%, transparent 25%),
+    linear-gradient(-45deg, #27272a 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #27272a 75%),
+    linear-gradient(-45deg, transparent 75%, #27272a 75%);
+  background-size: 12px 12px;
+  background-position:
+    0 0,
+    0 6px,
+    6px -6px,
+    -6px 0px;
+  background-color: #18181b;
+}
+
+/* ── Drop zone hover glow ──────────────────────────────────────── */
+.dropzone-active {
+  border-color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.06) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 0 30px rgba(59, 130, 246, 0.08);
+}
+
+/* ── Step indicator active gradient ────────────────────────────── */
+.step-active {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+}
+
+/* ── Size slot hover effect ────────────────────────────────────── */
+.size-slot {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.size-slot:hover {
+  transform: translateY(-1px);
+}
+
+/* ── Smooth transitions (exclude transforms to avoid jank) ─────── */
+*, *::before, *::after {
+  transition-property: background-color, border-color, box-shadow, opacity, color;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* ── Selection ─────────────────────────────────────────────────── */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #e4e4e7;
+}
+
