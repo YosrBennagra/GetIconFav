@@ -1,0 +1,123 @@
+# ─────────────────────────────────────────────────────────────
+# Release Pipeline — GetIconFav
+# Creates GitHub releases when release/* branches merge to main
+# ─────────────────────────────────────────────────────────────
+
+name: Release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  release:
+    name: Create Release
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version
+        id: version
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          VERSION="${BRANCH#release/}"
+          echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+          echo "📦 Release version: v${VERSION}"
+
+      - name: Validate semver
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]; then
+            echo "::error::Invalid semver: $VERSION"
+            exit 1
+          fi
+
+      - name: Check tag doesn't exist
+        run: |
+          if git rev-parse "${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "::error::Tag ${{ steps.version.outputs.version }} already exists"
+            exit 1
+          fi
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$PREV_TAG" ]; then
+            RANGE="HEAD"
+          else
+            RANGE="${PREV_TAG}..HEAD"
+          fi
+
+          FEATURES=$(git log $RANGE --oneline --grep="^feat" 2>/dev/null || true)
+          FIXES=$(git log $RANGE --oneline --grep="^fix" 2>/dev/null || true)
+          OTHER=$(git log $RANGE --oneline --invert-grep --grep="^feat" --grep="^fix" 2>/dev/null || true)
+
+          {
+            echo "changelog<<EOF"
+            echo "## What's Changed"
+            echo ""
+            if [ -n "$FEATURES" ]; then
+              echo "### ✨ Features"
+              echo "$FEATURES" | sed 's/^/- /'
+              echo ""
+            fi
+            if [ -n "$FIXES" ]; then
+              echo "### 🐛 Bug Fixes"
+              echo "$FIXES" | sed 's/^/- /'
+              echo ""
+            fi
+            if [ -n "$OTHER" ]; then
+              echo "### 📦 Other Changes"
+              echo "$OTHER" | sed 's/^/- /'
+              echo ""
+            fi
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Create tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.version.outputs.version }}" -m "Release ${{ steps.version.outputs.version }}"
+          git push origin "${{ steps.version.outputs.version }}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── Back-merge main → develop ──────────────────────────────
+  back-merge:
+    name: Back-merge to develop
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create back-merge PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/back-merge-${{ github.event.pull_request.head.ref }}
+          base: develop
+          title: "chore: back-merge main → develop after ${{ github.event.pull_request.head.ref }}"
+          body: |
+            Automated back-merge after release merge.
+            Keeps `develop` in sync with `main`.
+          labels: chore, automated

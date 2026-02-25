@@ -6,7 +6,9 @@ import { DropZone } from './components/drop-zone';
 import { SourceInfo } from './components/source-info';
 import { SizeSlotGrid } from './components/size-slot-grid';
 import { StepIndicator } from './components/step-indicator';
-import { BrowserPreview } from './components/browser-preview';
+import { FaviconPreviews } from './components/favicon-previews';
+import { FaviconGuide } from './components/favicon-guide';
+import { SupportLinks } from './components/support-links';
 
 interface ImageState {
   readonly file: File;
@@ -235,9 +237,9 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent leading-tight">
-                IconForge
+                GetIconFav
               </h1>
-              <p className="text-[11px] text-zinc-500 font-medium tracking-wide">Professional ICO Generator</p>
+              <p className="text-[11px] text-zinc-500 font-medium tracking-wide">Free Favicon Generator & ICO Converter</p>
             </div>
           </div>
 
@@ -425,13 +427,19 @@ export default function App() {
           </section>
         )}
 
-        {/* ── Browser tab preview ────────────────────────────── */}
-        {finalPreviews.has(16) && !isProcessing && (
-          <BrowserPreview
-            faviconUrl={finalPreviews.get(16)!}
+        {/* ── Favicon previews ───────────────────────────────── */}
+        {finalPreviews.size > 0 && !isProcessing && (
+          <FaviconPreviews
+            previews={finalPreviews}
             title={masterImage?.file.name.replace(/\.[^.]+$/, '') ?? 'My Page'}
           />
         )}
+
+        {/* ── Education / Guide ──────────────────────────────── */}
+        <FaviconGuide />
+
+        {/* ── Support links ──────────────────────────────────── */}
+        <SupportLinks />
       </main>
 
       {/* ── Footer ──────────────────────────────────────────── */}
@@ -444,7 +452,7 @@ export default function App() {
             100% client-side — your images never leave your browser
           </p>
           <p className="text-xs text-zinc-600">
-            IconForge by Veinpal
+            GetIconFav by <a href="https://github.com/YosrBennagra" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-300 transition-colors">Veinpal</a>
           </p>
         </div>
       </footer>

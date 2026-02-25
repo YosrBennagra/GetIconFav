@@ -1,0 +1,309 @@
+import { useState } from 'react';
+
+const INSTALL_METHODS = [
+  {
+    id: 'html',
+    label: 'HTML',
+    icon: '🌐',
+    desc: 'Standard HTML link tag (works everywhere)',
+    code: `<!-- Place favicon.ico in your root directory, then add: -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- For multiple sizes (recommended): -->
+<link rel="icon" type="image/x-icon" sizes="16x16" href="/favicon-16x16.ico">
+<link rel="icon" type="image/x-icon" sizes="32x32" href="/favicon-32x32.ico">
+<link rel="icon" type="image/x-icon" sizes="48x48" href="/favicon-48x48.ico">`,
+  },
+  {
+    id: 'react',
+    label: 'React / Vite',
+    icon: '⚛️',
+    desc: 'Place in public/ folder and reference in index.html',
+    code: `<!-- public/index.html or index.html (Vite) -->
+<head>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<!-- Or dynamically in React: -->
+<!-- Place favicon.ico in the public/ folder -->
+<!-- It will be served from the root automatically -->`,
+  },
+  {
+    id: 'nextjs',
+    label: 'Next.js',
+    icon: '▲',
+    desc: 'App Router: place in app/ folder; Pages Router: place in public/',
+    code: `// Next.js App Router (v13+):
+// Simply place favicon.ico in the app/ directory
+// app/favicon.ico → automatically served
+
+// Next.js Pages Router:
+// Place favicon.ico in the public/ directory
+// public/favicon.ico → served at /favicon.ico
+
+// Or use metadata API (App Router):
+// app/layout.tsx
+export const metadata = {
+  icons: {
+    icon: '/favicon.ico',
+  },
+}`,
+  },
+  {
+    id: 'wordpress',
+    label: 'WordPress',
+    icon: '📝',
+    desc: 'Use the built-in Site Icon feature in Customizer',
+    code: `/* Method 1: WordPress Customizer (Recommended) */
+/* Dashboard → Appearance → Customize → Site Identity → Site Icon */
+/* Upload your icon image (WordPress handles the rest) */
+
+/* Method 2: Manual (functions.php) */
+function custom_favicon() {
+  echo '<link rel="icon" type="image/x-icon"
+    href="' . get_template_directory_uri() . '/favicon.ico">';
+}
+add_action('wp_head', 'custom_favicon');
+
+/* Method 3: Simply upload favicon.ico to your root directory */`,
+  },
+  {
+    id: 'angular',
+    label: 'Angular',
+    icon: '🅰️',
+    desc: 'Place in src/ folder and update angular.json assets',
+    code: `<!-- src/index.html -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<!-- angular.json — ensure favicon.ico is in assets: -->
+{
+  "assets": [
+    "src/favicon.ico",
+    "src/assets"
+  ]
+}`,
+  },
+  {
+    id: 'static',
+    label: 'Static / CDN',
+    icon: '📁',
+    desc: 'Upload favicon.ico to your server root',
+    code: `<!-- Option 1: Place favicon.ico in your website root -->
+<!-- Browsers automatically look for /favicon.ico -->
+
+<!-- Option 2: Explicit path (if not in root) -->
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+<!-- Option 3: CDN-hosted -->
+<link rel="icon" type="image/x-icon"
+  href="https://cdn.example.com/favicon.ico">`,
+  },
+] as const;
+
+export function FaviconGuide() {
+  const [activeTab, setActiveTab] = useState('html');
+  const [expandedFaq, setExpandedFaq] = useState<string | null>(null);
+
+  const activeMethod = INSTALL_METHODS.find((m) => m.id === activeTab) ?? INSTALL_METHODS[0];
+
+  const toggleFaq = (id: string) => {
+    setExpandedFaq((prev) => (prev === id ? null : id));
+  };
+
+  return (
+    <div className="space-y-10">
+      {/* ── Section Divider ──────────────────────────────────── */}
+      <div className="flex items-center gap-4">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
+        <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Learn</span>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
+      </div>
+
+      {/* ── What is a Favicon? ────────────────────────────────── */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-sm">💡</span>
+          What is a Favicon?
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/60 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg">🖼️</div>
+            <h3 className="text-sm font-semibold text-zinc-200">Small but Important</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              A favicon (short for &quot;favorite icon&quot;) is a small icon associated with your website. It appears in browser tabs, bookmarks, history, and search results.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/60 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-lg">📐</div>
+            <h3 className="text-sm font-semibold text-zinc-200">Multiple Sizes Needed</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Different contexts require different sizes. Browser tabs use 16&times;16, taskbars use 32&times;32, and desktop shortcuts use up to 256&times;256 pixels.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/60 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg">📦</div>
+            <h3 className="text-sm font-semibold text-zinc-200">ICO Format</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              The <code className="text-emerald-400 bg-emerald-400/10 px-1 rounded text-[11px]">.ico</code> format bundles multiple icon sizes into a single file. This ensures your icon looks sharp on every device and display.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── How to Install ────────────────────────────────────── */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 text-sm">🔧</span>
+          How to Install Your Favicon
+        </h2>
+
+        {/* Platform tabs */}
+        <div className="flex flex-wrap gap-1.5">
+          {INSTALL_METHODS.map((m) => (
+            <button
+              key={m.id}
+              type="button"
+              onClick={() => setActiveTab(m.id)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === m.id
+                  ? 'bg-blue-500/15 text-blue-400 border border-blue-500/30'
+                  : 'bg-zinc-800/60 text-zinc-400 border border-zinc-700/40 hover:text-zinc-200 hover:bg-zinc-700/60'
+              }`}
+            >
+              <span className="mr-1">{m.icon}</span> {m.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Code panel */}
+        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-800/40 bg-zinc-900/80">
+            <div>
+              <span className="text-sm font-semibold text-zinc-200">{activeMethod.icon} {activeMethod.label}</span>
+              <p className="text-[11px] text-zinc-500 mt-0.5">{activeMethod.desc}</p>
+            </div>
+            <CopyButton text={activeMethod.code} />
+          </div>
+          <pre className="p-4 overflow-x-auto text-xs leading-relaxed">
+            <code className="text-zinc-300 font-mono">{activeMethod.code}</code>
+          </pre>
+        </div>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────── */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-sm">❓</span>
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-2">
+          {FAQ_ITEMS.map((faq) => (
+            <div key={faq.id} className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
+              <button
+                type="button"
+                onClick={() => toggleFaq(faq.id)}
+                className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-800/30 transition-colors"
+              >
+                <span className="text-sm font-medium text-zinc-200">{faq.q}</span>
+                <svg
+                  className={`w-4 h-4 text-zinc-500 shrink-0 ml-3 transition-transform duration-200 ${expandedFaq === faq.id ? 'rotate-180' : ''}`}
+                  fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+              </button>
+              {expandedFaq === faq.id && (
+                <div className="px-4 pb-3 text-xs text-zinc-400 leading-relaxed border-t border-zinc-800/30 pt-3">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// ── Copy Button ────────────────────────────────────────────────
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className="flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-semibold
+        bg-zinc-800 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700
+        border border-zinc-700/50 hover:border-zinc-600 transition-all"
+    >
+      {copied ? (
+        <>
+          <svg className="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+          </svg>
+          Copied!
+        </>
+      ) : (
+        <>
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+          </svg>
+          Copy
+        </>
+      )}
+    </button>
+  );
+}
+
+// ── FAQ Data ──────────────────────────────────────────────────
+
+const FAQ_ITEMS = [
+  {
+    id: 'what-sizes',
+    q: 'What sizes should my favicon be?',
+    a: 'The most important sizes are 16×16 (browser tabs), 32×32 (taskbar/standard), 48×48 (desktop shortcuts), and 256×256 (high-DPI / Windows thumbnails). For maximum compatibility, include all of these in your .ico file. This tool generates all standard sizes automatically.',
+  },
+  {
+    id: 'svg-vs-png',
+    q: 'Should I use SVG or PNG as my source?',
+    a: 'SVG is ideal because it\'s vector-based and scales perfectly to any size without quality loss. If you use PNG, start with at least 512×512 pixels to ensure the downscaled versions look crisp. Avoid using JPG as source since it doesn\'t support transparency.',
+  },
+  {
+    id: 'ico-vs-png',
+    q: 'Can I use PNG instead of ICO?',
+    a: 'Modern browsers support PNG favicons via <link rel="icon" type="image/png" href="...">, but .ico has the widest compatibility. ICO also bundles multiple sizes in one file, so the browser picks the best resolution. For maximum compatibility, use .ico alongside PNG fallbacks.',
+  },
+  {
+    id: 'transparency',
+    q: 'Does the ICO format support transparency?',
+    a: 'Yes! ICO files support full alpha transparency when using 32-bit color depth (which is the default in this tool). Use PNG or SVG source images with transparent backgrounds to preserve transparency in your favicon.',
+  },
+  {
+    id: 'cache',
+    q: 'My favicon isn\'t updating — what should I do?',
+    a: 'Browsers aggressively cache favicons. Try: (1) Hard refresh with Ctrl+Shift+R, (2) Clear your browser cache, (3) Add a version query string like favicon.ico?v=2, (4) Open in an incognito/private window, (5) Wait — some browsers cache favicons for days.',
+  },
+  {
+    id: 'apple-touch',
+    q: 'What about Apple Touch Icon?',
+    a: 'Apple devices use a separate "apple-touch-icon" for home screen bookmarks. It\'s typically 180×180 PNG. While this tool generates .ico files, you can use the 256×256 or 128×128 generated preview as a base for your apple-touch-icon. Add it with: <link rel="apple-touch-icon" href="/apple-touch-icon.png">',
+  },
+  {
+    id: 'where',
+    q: 'Where do I put the favicon.ico file?',
+    a: 'Place favicon.ico in the root directory of your website (same level as index.html). Browsers automatically look for /favicon.ico even without an explicit <link> tag. For non-root placement, you must add a <link rel="icon"> tag pointing to the correct path.',
+  },
+  {
+    id: 'privacy',
+    q: 'Is my image uploaded anywhere?',
+    a: 'No. GetIconFav runs 100% in your browser. Your images are processed locally using the Canvas API and never sent to any server. You can verify this by using the tool offline after the page loads.',
+  },
+] as const;
