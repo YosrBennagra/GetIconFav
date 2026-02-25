@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FiImage, FiRefreshCw, FiDownload, FiShield } from 'react-icons/fi';
 import { ICON_SIZES, type IconSize } from './lib/constants';
 import { encodeIco, type IcoEntry } from './lib/ico-encoder';
 import { blobToDataUrl, formatFileSize, loadImage, resizeImage } from './lib/image-resizer';
@@ -231,9 +232,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/15 to-violet-500/15 border border-blue-500/20 shadow-lg shadow-blue-500/5">
-              <svg className="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
-              </svg>
+              <FiImage className="w-5 h-5 text-blue-400" />
             </div>
             <div>
               <h1 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent leading-tight">
@@ -251,9 +250,7 @@ export default function App() {
                 bg-zinc-800/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700
                 border border-zinc-700/60 hover:border-zinc-600 transition-all duration-200"
             >
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182" />
-              </svg>
+              <FiRefreshCw className="w-3.5 h-3.5" />
               Start Over
             </button>
           )}
@@ -372,16 +369,12 @@ export default function App() {
                 <h3 className="text-sm font-semibold text-zinc-200">Ready to generate</h3>
                 <div className="flex items-center gap-4 text-xs text-zinc-500">
                   <span className="flex items-center gap-1.5">
-                    <svg className="w-3.5 h-3.5 text-blue-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
-                    </svg>
+                    <FiImage className="w-3.5 h-3.5 text-blue-400" />
                     {selectedCount} {selectedCount === 1 ? 'size' : 'sizes'} selected
                   </span>
                   {icoSize !== null && (
                     <span className="flex items-center gap-1.5">
-                      <svg className="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                      </svg>
+                      <FiDownload className="w-3.5 h-3.5 text-violet-400" />
                       ~{formatFileSize(icoSize)}
                     </span>
                   )}
@@ -416,9 +409,7 @@ export default function App() {
                   </>
                 ) : (
                   <>
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                    </svg>
+                    <FiDownload className="w-5 h-5" />
                     Download .ico
                   </>
                 )}
@@ -443,12 +434,10 @@ export default function App() {
       </main>
 
       {/* ── Footer ──────────────────────────────────────────── */}
-      <footer className="border-t border-zinc-800/30 py-5 mt-auto">
+      <footer className="border-t border-zinc-800/30 py-5 mt-auto pb-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-zinc-600 flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-emerald-500/50" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-            </svg>
+            <FiShield className="w-3.5 h-3.5 text-emerald-500/50" />
             100% client-side — your images never leave your browser
           </p>
           <p className="text-xs text-zinc-600">

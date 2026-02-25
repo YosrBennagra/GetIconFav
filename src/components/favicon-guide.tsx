@@ -1,10 +1,21 @@
 import { useState } from 'react';
+import { FiCheck, FiChevronDown, FiCopy } from 'react-icons/fi';
+import { FaHtml5, FaReact, FaAngular, FaWordpress } from 'react-icons/fa';
+import { SiNextdotjs } from 'react-icons/si';
+import { FiServer } from 'react-icons/fi';
+import type { IconType } from 'react-icons';
 
-const INSTALL_METHODS = [
+const INSTALL_METHODS: readonly {
+  readonly id: string;
+  readonly label: string;
+  readonly Icon: IconType;
+  readonly desc: string;
+  readonly code: string;
+}[] = [
   {
     id: 'html',
     label: 'HTML',
-    icon: '🌐',
+    Icon: FaHtml5,
     desc: 'Standard HTML link tag (works everywhere)',
     code: `<!-- Place favicon.ico in your root directory, then add: -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -17,7 +28,7 @@ const INSTALL_METHODS = [
   {
     id: 'react',
     label: 'React / Vite',
-    icon: '⚛️',
+    Icon: FaReact,
     desc: 'Place in public/ folder and reference in index.html',
     code: `<!-- public/index.html or index.html (Vite) -->
 <head>
@@ -31,7 +42,7 @@ const INSTALL_METHODS = [
   {
     id: 'nextjs',
     label: 'Next.js',
-    icon: '▲',
+    Icon: SiNextdotjs,
     desc: 'App Router: place in app/ folder; Pages Router: place in public/',
     code: `// Next.js App Router (v13+):
 // Simply place favicon.ico in the app/ directory
@@ -52,7 +63,7 @@ export const metadata = {
   {
     id: 'wordpress',
     label: 'WordPress',
-    icon: '📝',
+    Icon: FaWordpress,
     desc: 'Use the built-in Site Icon feature in Customizer',
     code: `/* Method 1: WordPress Customizer (Recommended) */
 /* Dashboard → Appearance → Customize → Site Identity → Site Icon */
@@ -70,7 +81,7 @@ add_action('wp_head', 'custom_favicon');
   {
     id: 'angular',
     label: 'Angular',
-    icon: '🅰️',
+    Icon: FaAngular,
     desc: 'Place in src/ folder and update angular.json assets',
     code: `<!-- src/index.html -->
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -86,7 +97,7 @@ add_action('wp_head', 'custom_favicon');
   {
     id: 'static',
     label: 'Static / CDN',
-    icon: '📁',
+    Icon: FiServer,
     desc: 'Upload favicon.ico to your server root',
     code: `<!-- Option 1: Place favicon.ico in your website root -->
 <!-- Browsers automatically look for /favicon.ico -->
@@ -98,13 +109,13 @@ add_action('wp_head', 'custom_favicon');
 <link rel="icon" type="image/x-icon"
   href="https://cdn.example.com/favicon.ico">`,
   },
-] as const;
+];
 
 export function FaviconGuide() {
   const [activeTab, setActiveTab] = useState('html');
   const [expandedFaq, setExpandedFaq] = useState<string | null>(null);
 
-  const activeMethod = INSTALL_METHODS.find((m) => m.id === activeTab) ?? INSTALL_METHODS[0];
+  const activeMethod = INSTALL_METHODS.find((m) => m.id === activeTab) ?? INSTALL_METHODS[0]!;
 
   const toggleFaq = (id: string) => {
     setExpandedFaq((prev) => (prev === id ? null : id));
@@ -170,7 +181,7 @@ export function FaviconGuide() {
                   : 'bg-zinc-800/60 text-zinc-400 border border-zinc-700/40 hover:text-zinc-200 hover:bg-zinc-700/60'
               }`}
             >
-              <span className="mr-1">{m.icon}</span> {m.label}
+              <m.Icon className="w-3.5 h-3.5 mr-1 inline-block" /> {m.label}
             </button>
           ))}
         </div>
@@ -179,7 +190,10 @@ export function FaviconGuide() {
         <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-800/40 bg-zinc-900/80">
             <div>
-              <span className="text-sm font-semibold text-zinc-200">{activeMethod.icon} {activeMethod.label}</span>
+              <span className="text-sm font-semibold text-zinc-200 flex items-center gap-1.5">
+                <activeMethod.Icon className="w-4 h-4" />
+                {activeMethod.label}
+              </span>
               <p className="text-[11px] text-zinc-500 mt-0.5">{activeMethod.desc}</p>
             </div>
             <CopyButton text={activeMethod.code} />
@@ -205,12 +219,9 @@ export function FaviconGuide() {
                 className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-800/30 transition-colors"
               >
                 <span className="text-sm font-medium text-zinc-200">{faq.q}</span>
-                <svg
+                <FiChevronDown
                   className={`w-4 h-4 text-zinc-500 shrink-0 ml-3 transition-transform duration-200 ${expandedFaq === faq.id ? 'rotate-180' : ''}`}
-                  fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
+                />
               </button>
               {expandedFaq === faq.id && (
                 <div className="px-4 pb-3 text-xs text-zinc-400 leading-relaxed border-t border-zinc-800/30 pt-3">
@@ -246,16 +257,12 @@ function CopyButton({ text }: { text: string }) {
     >
       {copied ? (
         <>
-          <svg className="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-          </svg>
+          <FiCheck className="w-3 h-3 text-emerald-400" />
           Copied!
         </>
       ) : (
         <>
-          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9.75a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
-          </svg>
+          <FiCopy className="w-3 h-3" />
           Copy
         </>
       )}

@@ -1,4 +1,5 @@
 import { useCallback, useState, type DragEvent } from 'react';
+import { FiCheck, FiX, FiPlus, FiUploadCloud } from 'react-icons/fi';
 import { ICON_SIZES, SIZE_META, ACCEPTED_TYPES, type IconSize } from '../lib/constants';
 
 interface SizeSlotGridProps {
@@ -118,9 +119,7 @@ export function SizeSlotGrid({
                     className={`w-[18px] h-[18px] rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all duration-150 ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-zinc-600 bg-transparent group-hover/check:border-zinc-500'}`}
                   >
                     {isSelected && (
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg>
+                      <FiCheck className="w-2.5 h-2.5 text-white" strokeWidth={3} />
                     )}
                   </div>
                   <span className="text-sm font-mono font-semibold text-zinc-300">{size}&times;{size}</span>
@@ -137,9 +136,7 @@ export function SizeSlotGrid({
                       title="Remove custom image"
                       className="p-1 rounded-md hover:bg-zinc-700 text-zinc-500 hover:text-red-400 transition-colors"
                     >
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                      </svg>
+                      <FiX className="w-3.5 h-3.5" />
                     </button>
                   )}
                 </div>
@@ -174,9 +171,7 @@ export function SizeSlotGrid({
                 {!isSlotProcessing && !dataUrl && (
                   <div className="flex flex-col items-center gap-2 text-zinc-600 py-2">
                     <div className="w-10 h-10 rounded-lg border-2 border-dashed border-zinc-700 flex items-center justify-center">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                      </svg>
+                      <FiPlus className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-medium">Drop image here</span>
                   </div>
@@ -203,9 +198,7 @@ export function SizeSlotGrid({
               {isDragOver && (
                 <div className="absolute inset-0 bg-blue-500/10 backdrop-blur-[2px] flex items-center justify-center z-10">
                   <div className="flex flex-col items-center gap-1.5 text-blue-400">
-                    <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
-                    </svg>
+                    <FiUploadCloud className="w-7 h-7" />
                     <span className="text-xs font-semibold">Drop to set {size}&times;{size}</span>
                   </div>
                 </div>

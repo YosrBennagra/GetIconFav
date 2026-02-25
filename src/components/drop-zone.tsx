@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState, type DragEvent, type ChangeEvent } from 'react';
+import { FiUploadCloud } from 'react-icons/fi';
 import { ACCEPTED_EXTENSIONS, ACCEPTED_TYPES } from '../lib/constants';
 
 interface DropZoneProps {
@@ -83,19 +84,7 @@ export function DropZone({ onFileSelected, disabled = false }: DropZoneProps) {
       <div className="relative">
         <div className="absolute inset-0 w-20 h-20 -top-2 -left-2 bg-blue-500/10 rounded-full blur-xl" />
         <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/15 to-violet-500/15 border border-blue-500/20 shadow-lg shadow-blue-500/5">
-          <svg
-            className="w-8 h-8 text-blue-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-            />
-          </svg>
+          <FiUploadCloud className="w-8 h-8 text-blue-400" />
         </div>
       </div>
 

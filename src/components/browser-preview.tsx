@@ -1,3 +1,5 @@
+import { FiX, FiPlus, FiLock } from 'react-icons/fi';
+
 interface BrowserPreviewProps {
   readonly faviconUrl: string;
   readonly title: string;
@@ -31,23 +33,17 @@ export function BrowserPreview({ faviconUrl, title }: BrowserPreviewProps) {
               style={{ imageRendering: 'pixelated' }}
             />
             <span className="text-[11px] text-zinc-300 truncate">{title}</span>
-            <svg className="w-3 h-3 text-zinc-600 shrink-0 ml-auto" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
+            <FiX className="w-3 h-3 text-zinc-600 shrink-0 ml-auto" />
           </div>
           <div className="flex items-center px-2 pb-2 text-zinc-700">
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
+            <FiPlus className="w-3.5 h-3.5" />
           </div>
         </div>
 
         {/* Address bar */}
         <div className="bg-zinc-900/60 px-3 py-2 border-t border-zinc-700/30">
           <div className="flex items-center gap-2 bg-zinc-800/60 rounded-lg px-3 py-1.5">
-            <svg className="w-3 h-3 text-emerald-500/60 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
+            <FiLock className="w-3 h-3 text-emerald-500/60 shrink-0" />
             <span className="text-[11px] text-zinc-500">yourwebsite.com</span>
           </div>
         </div>

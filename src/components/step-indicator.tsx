@@ -1,3 +1,5 @@
+import { FiCheck } from 'react-icons/fi';
+
 interface StepIndicatorProps {
   readonly currentStep: number;
 }
@@ -30,9 +32,7 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
                 `}
               >
                 {isCompleted ? (
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
+                  <FiCheck className="w-4 h-4" strokeWidth={2.5} />
                 ) : (
                   step.num
                 )}
