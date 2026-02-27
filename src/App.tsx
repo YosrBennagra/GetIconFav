@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiImage, FiRefreshCw, FiDownload, FiBookOpen, FiEye, FiX, FiLock } from 'react-icons/fi';
+import { Analytics } from '@vercel/analytics/react';
 import { ICON_SIZES, type IconSize } from './lib/constants';
 import { encodeIco, type IcoEntry } from './lib/ico-encoder';
 import { blobToDataUrl, formatFileSize, loadImage, resizeImage } from './lib/image-resizer';
@@ -519,6 +520,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
