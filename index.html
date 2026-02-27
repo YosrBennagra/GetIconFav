@@ -10,8 +10,10 @@
     <meta name="description" content="Free online favicon.ico generator. Convert PNG, JPG, SVG, WebP to multi-size ICO files. Preview in browser tabs, taskbars, and desktops. 100% client-side — your images never leave your browser." />
     <meta name="keywords" content="favicon generator, ico converter, favicon maker, icon generator, favicon creator, png to ico, convert to ico, multi-size favicon, browser icon, website icon, free favicon tool" />
     <meta name="author" content="Veinpal" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="language" content="English" />
+    <meta name="rating" content="general" />
+    <meta name="revisit-after" content="7 days" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://gifav.veinpal.com/" />
@@ -29,10 +31,12 @@
     <meta name="twitter:url" content="https://gifav.veinpal.com/" />
     <meta name="twitter:title" content="GetIconFav — Free Favicon Generator & ICO Converter" />
     <meta name="twitter:description" content="Convert any image to multi-size .ico files. Preview favicons in browser tabs, taskbars, and desktops. 100% client-side processing." />
+    <meta name="twitter:creator" content="@veinpal" />
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#09090b" />
     <meta name="msapplication-TileColor" content="#09090b" />
+    <meta name="color-scheme" content="dark" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,6 +63,56 @@
         "name": "Veinpal",
         "url": "https://veinpal.com"
       }
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What sizes should my favicon be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Essential sizes: 16×16 (tabs), 32×32 (taskbar), 48×48 (shortcuts), 256×256 (high-DPI). GetIconFav generates all standard sizes automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use PNG instead of ICO for favicons?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Modern browsers support PNG favicons, but .ico has the widest compatibility and bundles multiple sizes in one file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does ICO support transparency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! ICO supports full alpha transparency at 32-bit color depth. Use PNG or SVG source images with transparent backgrounds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my image uploaded anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GetIconFav runs 100% in your browser using Canvas API. Your images never leave your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SVG or PNG as favicon source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SVG is ideal — it's vector and scales perfectly. If using PNG, start with 512×512 or larger for crisp results at all sizes."
+          }
+        }
+      ]
     }
     </script>
   </head>
