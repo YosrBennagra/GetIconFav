@@ -73,34 +73,30 @@ export function DropZone({ onFileSelected, disabled = false }: DropZoneProps) {
       }}
       className={`
         relative flex flex-col items-center justify-center gap-5
-        w-full min-h-[280px] p-10
-        border-2 border-dashed rounded-2xl cursor-pointer
-        transition-all duration-300
-        ${isDragOver ? 'dropzone-active' : 'border-zinc-700/60 hover:border-zinc-500 bg-zinc-900/30 hover:bg-zinc-900/50'}
+        w-full h-full p-10
+        border-2 border-dashed rounded-xl cursor-pointer
+        ${isDragOver ? 'dropzone-active' : 'border-zinc-700/40 hover:border-neon-cyan/30 bg-zinc-950/50'}
         ${disabled ? 'opacity-50 pointer-events-none' : ''}
       `}
     >
-      {/* Gradient glow behind icon */}
-      <div className="relative">
-        <div className="absolute inset-0 w-20 h-20 -top-2 -left-2 bg-blue-500/10 rounded-full blur-xl" />
-        <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/15 to-violet-500/15 border border-blue-500/20 shadow-lg shadow-blue-500/5">
-          <FiUploadCloud className="w-8 h-8 text-blue-400" />
-        </div>
+      {/* Icon */}
+      <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-zinc-900 border border-neon-cyan/20">
+        <FiUploadCloud className="w-8 h-8 text-neon-cyan" />
       </div>
 
       {/* Text */}
       <div className="text-center space-y-2">
-        <p className="text-lg font-semibold text-zinc-200">
-          Drop your master image here
+        <p className="text-lg font-mono font-semibold text-zinc-200">
+          Drop your <span className="text-neon-cyan">source image</span> here
         </p>
-        <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
-          Use a high-resolution <span className="text-blue-400 font-medium">SVG</span> or <span className="text-blue-400 font-medium">PNG</span> for
-          best results. All icon sizes will be auto-generated.
+        <p className="text-sm text-zinc-500 leading-relaxed font-mono max-w-md">
+          Use a high-res <span className="text-neon-cyan font-semibold">SVG</span> or{' '}
+          <span className="text-neon-cyan font-semibold">PNG</span> (512px+ recommended) for best results
         </p>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-zinc-600 font-mono">
           or{' '}
-          <span className="text-blue-400 underline underline-offset-2 decoration-blue-400/40 hover:decoration-blue-400">
-            click to browse
+          <span className="text-neon-purple underline underline-offset-2 decoration-neon-purple/40 hover:decoration-neon-purple cursor-pointer">
+            browse files
           </span>
         </p>
       </div>
@@ -110,12 +106,16 @@ export function DropZone({ onFileSelected, disabled = false }: DropZoneProps) {
         {['SVG', 'PNG', 'JPG', 'WebP', 'BMP', 'GIF'].map((fmt) => (
           <span
             key={fmt}
-            className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 bg-zinc-800/60 px-2 py-0.5 rounded border border-zinc-700/40"
+            className="text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-500 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800"
           >
             {fmt}
           </span>
         ))}
       </div>
+
+      <p className="text-[10px] text-zinc-600 font-mono">
+        100% client-side — your files never leave your browser
+      </p>
 
       {/* Hidden file input */}
       <input

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiImage, FiRefreshCw, FiDownload, FiShield } from 'react-icons/fi';
+import { FiImage, FiRefreshCw, FiDownload, FiBookOpen, FiEye, FiX, FiLock } from 'react-icons/fi';
 import { ICON_SIZES, type IconSize } from './lib/constants';
 import { encodeIco, type IcoEntry } from './lib/ico-encoder';
 import { blobToDataUrl, formatFileSize, loadImage, resizeImage } from './lib/image-resizer';
@@ -33,6 +33,8 @@ export default function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingSlots, setProcessingSlots] = useState<Set<number>>(new Set());
   const [isDownloading, setIsDownloading] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
+  const [showPreviews, setShowPreviews] = useState(false);
 
   // ── Merged previews & blobs (custom overrides auto) ──────────
 
@@ -224,227 +226,299 @@ export default function App() {
   // ── Render ───────────────────────────────────────────────────
 
   const selectedCount = [...selectedSizes].filter((s) => finalBlobs.has(s)).length;
+  const fav16 = finalPreviews.get(16);
+  const pageTitle = masterImage?.file.name.replace(/\.[^.]+$/, '') ?? 'My Page';
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden bg-zinc-950">
       {/* ── Header ──────────────────────────────────────────── */}
-      <header className="border-b border-zinc-800/50 bg-zinc-950/90 backdrop-blur-xl sticky top-0 z-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/15 to-violet-500/15 border border-blue-500/20 shadow-lg shadow-blue-500/5">
-              <FiImage className="w-5 h-5 text-blue-400" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent leading-tight">
-                GetIconFav
-              </h1>
-              <p className="text-[11px] text-zinc-500 font-medium tracking-wide">Free Favicon Generator & ICO Converter</p>
-            </div>
+      <header className="h-12 border-b border-zinc-800/40 shrink-0 flex items-center px-4 gap-4">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center justify-center w-7 h-7 rounded-md bg-zinc-900 border border-zinc-800">
+            <FiImage className="w-3.5 h-3.5 text-neon-cyan" />
           </div>
+          <h1 className="text-sm font-bold font-mono tracking-tight">
+            <span className="text-neon-cyan">Get</span>
+            <span className="text-neon-purple">Icon</span>
+            <span className="text-zinc-300">Fav</span>
+          </h1>
+        </div>
 
+        <div className="flex-1 flex justify-center">
+          <StepIndicator currentStep={currentStep} />
+        </div>
+
+        <div className="flex items-center gap-1.5 shrink-0">
+          {hasAnyPreview && !isProcessing && (
+            <button
+              type="button"
+              onClick={() => setShowPreviews(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
+                text-zinc-500 hover:text-neon-cyan border border-zinc-800 hover:border-neon-cyan/30"
+            >
+              <FiEye className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Previews</span>
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => setShowGuide(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
+              text-zinc-500 hover:text-neon-purple border border-zinc-800 hover:border-neon-purple/30"
+          >
+            <FiBookOpen className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Guide</span>
+          </button>
           {hasSource && (
             <button
               type="button"
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
-                bg-zinc-800/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700
-                border border-zinc-700/60 hover:border-zinc-600 transition-all duration-200"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
+                text-zinc-500 hover:text-neon-pink border border-zinc-800 hover:border-neon-pink/30"
             >
               <FiRefreshCw className="w-3.5 h-3.5" />
-              Start Over
+              <span className="hidden sm:inline">Reset</span>
             </button>
           )}
         </div>
       </header>
 
-      {/* ── Step indicator ──────────────────────────────────── */}
-      <div className="border-b border-zinc-800/30 bg-zinc-900/20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
-          <StepIndicator currentStep={currentStep} />
-        </div>
-      </div>
-
       {/* ── Main content ────────────────────────────────────── */}
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 space-y-8">
-        {/* Step 1: Hero upload zone */}
-        {!masterImage && (
-          <section className="space-y-6">
-            {customPreviews.size === 0 && (
-              <div className="text-center space-y-2 max-w-lg mx-auto">
-                <h2 className="text-2xl sm:text-3xl font-bold text-zinc-100">
-                  Create your perfect icon
-                </h2>
-                <p className="text-sm text-zinc-400 leading-relaxed">
-                  Drop a high-resolution image or SVG to auto-generate all standard icon sizes,
-                  or drag individual images onto each size slot below.
-                </p>
-              </div>
-            )}
+      <main className="flex-1 overflow-hidden">
+        {/* Step 1: Upload */}
+        {!hasSource && !hasAnyPreview && !isProcessing && (
+          <div className="h-full p-4">
             <DropZone onFileSelected={handleMasterDrop} disabled={isProcessing} />
-          </section>
+          </div>
         )}
 
-        {/* Processing indicator */}
+        {/* Processing */}
         {isProcessing && (
-          <div className="flex flex-col items-center justify-center gap-4 py-12">
+          <div className="h-full flex flex-col items-center justify-center gap-4">
             <div className="relative w-14 h-14">
-              <div className="absolute inset-0 border-[3px] border-blue-500/20 rounded-full" />
-              <div className="absolute inset-0 border-[3px] border-blue-500 border-t-transparent rounded-full animate-spin" />
+              <div className="absolute inset-0 border-2 border-neon-cyan/20 rounded-full" />
+              <div className="absolute inset-0 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-semibold text-zinc-300">Generating previews</p>
-              <p className="text-xs text-zinc-500 mt-1">Processing {ICON_SIZES.length} icon sizes…</p>
+              <p className="text-sm font-mono font-medium text-neon-cyan">Processing</p>
+              <p className="text-xs text-zinc-600 font-mono mt-1">Generating {ICON_SIZES.length} icon sizes</p>
             </div>
           </div>
         )}
 
-        {/* Source info */}
-        {masterImage && !isProcessing && (
-          <SourceInfo
-            fileName={masterImage.file.name}
-            fileSize={masterImage.file.size}
-            width={masterImage.element.naturalWidth}
-            height={masterImage.element.naturalHeight}
-            previewUrl={masterImage.previewUrl}
-            isSvg={masterImage.file.type === 'image/svg+xml'}
-            onChangeImage={handleReset}
-          />
-        )}
-
-        {/* Quick-select buttons */}
-        {hasAnyPreview && !isProcessing && (
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-zinc-500 font-medium mr-1">Quick select:</span>
-            <button
-              type="button"
-              onClick={handleSelectAll}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-800/60 text-zinc-400
-                hover:text-zinc-200 hover:bg-zinc-700 border border-zinc-700/50 hover:border-zinc-600 transition-all"
-            >
-              All sizes
-            </button>
-            <button
-              type="button"
-              onClick={handleSelectEssential}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-800/60 text-zinc-400
-                hover:text-zinc-200 hover:bg-zinc-700 border border-zinc-700/50 hover:border-zinc-600 transition-all"
-            >
-              Essential (16, 32, 48, 256)
-            </button>
-          </div>
-        )}
-
-        {/* Size slot grid — always visible when we have source or any customizations */}
+        {/* Step 2-3: Configure & Export — horizontal layout */}
         {(hasSource || hasAnyPreview) && !isProcessing && (
-          <SizeSlotGrid
-            previews={finalPreviews}
-            customSizes={customSizeSet}
-            selectedSizes={selectedSizes}
-            processingSlots={processingSlots}
-            sourceDimensions={
-              masterImage
-                ? { width: masterImage.element.naturalWidth, height: masterImage.element.naturalHeight }
-                : null
-            }
-            onToggleSize={handleToggleSize}
-            onDropOnSize={handleSizeDrop}
-            onClearCustom={handleClearCustom}
-          />
-        )}
+          <div className="h-full flex">
+            {/* Left panel: Source + inline preview */}
+            <div className="w-72 lg:w-80 border-r border-zinc-800/40 flex flex-col gap-4 p-4 overflow-y-auto shrink-0">
+              {masterImage && (
+                <SourceInfo
+                  fileName={masterImage.file.name}
+                  fileSize={masterImage.file.size}
+                  width={masterImage.element.naturalWidth}
+                  height={masterImage.element.naturalHeight}
+                  previewUrl={masterImage.previewUrl}
+                  isSvg={masterImage.file.type === 'image/svg+xml'}
+                  onChangeImage={handleReset}
+                />
+              )}
 
-        {/* ── Generate / Download section ────────────────────── */}
-        {canDownload && (
-          <section className="space-y-6 pt-2">
-            {/* Divider */}
-            <div className="flex items-center gap-4">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
-              <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Generate</span>
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
+              {/* Inline browser tab preview */}
+              {fav16 && (
+                <div className="rounded-lg border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+                  <div className="px-3 py-1.5 border-b border-zinc-800/30">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wide text-zinc-600">Tab Preview</span>
+                  </div>
+                  <div className="p-3">
+                    <div className="bg-zinc-800/50 rounded-lg border border-zinc-700/40 overflow-hidden">
+                      <div className="flex items-center gap-1.5 px-2.5 pt-2 pb-0">
+                        <div className="w-2 h-2 rounded-full bg-red-500/40" />
+                        <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
+                        <div className="w-2 h-2 rounded-full bg-green-500/40" />
+                      </div>
+                      <div className="flex items-end px-1.5 pt-1.5">
+                        <div className="flex items-center gap-1.5 bg-zinc-900/80 rounded-t px-2.5 py-1 max-w-[160px] border-t border-x border-zinc-700/40">
+                          <img src={fav16} alt="" width={14} height={14} className="shrink-0" style={{ imageRendering: 'pixelated' }} />
+                          <span className="text-[10px] text-zinc-400 truncate">{pageTitle}</span>
+                        </div>
+                      </div>
+                      <div className="bg-zinc-900/60 px-2.5 py-1 border-t border-zinc-700/30">
+                        <div className="flex items-center gap-1.5 bg-zinc-800/50 rounded px-2 py-0.5">
+                          <FiLock className="w-2 h-2 text-emerald-500/50 shrink-0" />
+                          <span className="text-[9px] text-zinc-600">yourwebsite.com</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Custom overrides info */}
+              {customSizeSet.size > 0 && (
+                <div className="px-3 py-2 rounded-lg bg-neon-green/5 border border-neon-green/15">
+                  <p className="text-[10px] font-mono text-neon-green/70">
+                    {customSizeSet.size} custom {customSizeSet.size === 1 ? 'override' : 'overrides'} applied
+                  </p>
+                </div>
+              )}
+
+              {/* Tip */}
+              <div className="mt-auto px-3 py-2 rounded-lg bg-zinc-900/40 border border-zinc-800/30">
+                <p className="text-[10px] font-mono text-zinc-600 leading-relaxed">
+                  Drag a different image onto any size slot on the right to override that specific size.
+                </p>
+              </div>
             </div>
 
-            {/* Download card */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 p-5 rounded-xl bg-zinc-900/50 border border-zinc-800/60">
-              {/* Info column */}
-              <div className="flex-1 space-y-2">
-                <h3 className="text-sm font-semibold text-zinc-200">Ready to generate</h3>
-                <div className="flex items-center gap-4 text-xs text-zinc-500">
-                  <span className="flex items-center gap-1.5">
-                    <FiImage className="w-3.5 h-3.5 text-blue-400" />
-                    {selectedCount} {selectedCount === 1 ? 'size' : 'sizes'} selected
-                  </span>
-                  {icoSize !== null && (
-                    <span className="flex items-center gap-1.5">
-                      <FiDownload className="w-3.5 h-3.5 text-violet-400" />
-                      ~{formatFileSize(icoSize)}
-                    </span>
-                  )}
-                  {customSizeSet.size > 0 && (
-                    <span className="flex items-center gap-1.5 text-emerald-400/70">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      {customSizeSet.size} custom
-                    </span>
-                  )}
-                </div>
+            {/* Right panel: Sizes + Download */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+              {/* Toolbar: quick selects */}
+              <div className="px-4 py-2.5 border-b border-zinc-800/30 flex items-center gap-2 shrink-0">
+                <span className="text-[10px] text-zinc-600 font-mono mr-1">Presets:</span>
+                <button
+                  type="button"
+                  onClick={handleSelectAll}
+                  className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-zinc-900 text-zinc-400 hover:text-neon-cyan border border-zinc-800 hover:border-neon-cyan/30"
+                >
+                  All
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSelectEssential}
+                  className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-zinc-900 text-zinc-400 hover:text-neon-green border border-zinc-800 hover:border-neon-green/30"
+                >
+                  Essential (16, 32, 48, 256)
+                </button>
               </div>
 
-              {/* Download button */}
-              <button
-                type="button"
-                onClick={handleDownload}
-                disabled={isDownloading}
-                className="
-                  flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl
-                  bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400
-                  active:from-blue-700 active:to-blue-600
-                  text-white font-bold text-sm
-                  disabled:opacity-50 disabled:cursor-not-allowed
-                  shadow-lg shadow-blue-600/25 hover:shadow-blue-500/35
-                  transition-all duration-200
-                "
-              >
-                {isDownloading ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Encoding…
-                  </>
-                ) : (
-                  <>
-                    <FiDownload className="w-5 h-5" />
-                    Download .ico
-                  </>
-                )}
-              </button>
+              {/* Size grid */}
+              <div className="flex-1 overflow-y-auto p-4">
+                <SizeSlotGrid
+                  previews={finalPreviews}
+                  customSizes={customSizeSet}
+                  selectedSizes={selectedSizes}
+                  processingSlots={processingSlots}
+                  sourceDimensions={
+                    masterImage
+                      ? { width: masterImage.element.naturalWidth, height: masterImage.element.naturalHeight }
+                      : null
+                  }
+                  onToggleSize={handleToggleSize}
+                  onDropOnSize={handleSizeDrop}
+                  onClearCustom={handleClearCustom}
+                />
+              </div>
+
+              {/* Download bar */}
+              {canDownload && (
+                <div className="border-t border-zinc-800/40 px-4 py-3 flex items-center justify-between shrink-0 bg-zinc-950">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-neon-green" />
+                      <span className="text-sm font-mono font-medium text-zinc-200">Ready</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs font-mono text-zinc-500">
+                      <span className="flex items-center gap-1">
+                        <FiImage className="w-3 h-3" />
+                        {selectedCount} {selectedCount === 1 ? 'size' : 'sizes'}
+                      </span>
+                      {icoSize !== null && (
+                        <span className="flex items-center gap-1">
+                          <FiDownload className="w-3 h-3" />
+                          ~{formatFileSize(icoSize)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    className="
+                      flex items-center gap-2 px-5 py-2 rounded-lg
+                      bg-gradient-to-r from-neon-cyan to-neon-purple
+                      text-zinc-950 font-mono font-bold text-xs uppercase tracking-wider
+                      hover:opacity-90 active:opacity-80
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                    "
+                  >
+                    {isDownloading ? (
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
+                        Encoding...
+                      </>
+                    ) : (
+                      <>
+                        <FiDownload className="w-4 h-4" />
+                        Download .ico
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
-          </section>
+          </div>
         )}
-
-        {/* ── Favicon previews ───────────────────────────────── */}
-        {finalPreviews.size > 0 && !isProcessing && (
-          <FaviconPreviews
-            previews={finalPreviews}
-            title={masterImage?.file.name.replace(/\.[^.]+$/, '') ?? 'My Page'}
-          />
-        )}
-
-        {/* ── Education / Guide ──────────────────────────────── */}
-        <FaviconGuide />
-
-        {/* ── Support links ──────────────────────────────────── */}
-        <SupportLinks />
       </main>
 
       {/* ── Footer ──────────────────────────────────────────── */}
-      <footer className="border-t border-zinc-800/30 py-5 mt-auto pb-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-zinc-600 flex items-center gap-1.5">
-            <FiShield className="w-3.5 h-3.5 text-emerald-500/50" />
-            100% client-side — your images never leave your browser
-          </p>
-          <p className="text-xs text-zinc-600">
-            GetIconFav by <a href="https://github.com/YosrBennagra" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-300 transition-colors">Veinpal</a>
-          </p>
-        </div>
+      <footer className="h-9 border-t border-zinc-800/40 shrink-0 bg-zinc-950">
+        <SupportLinks />
       </footer>
+
+      {/* ── Guide panel (slide-over) ────────────────────────── */}
+      {showGuide && (
+        <div className="fixed inset-0 z-50 flex">
+          <button
+            type="button"
+            className="absolute inset-0 bg-zinc-950/80"
+            onClick={() => setShowGuide(false)}
+            aria-label="Close guide"
+          />
+          <div className="relative ml-auto w-full max-w-xl h-full overflow-y-auto bg-zinc-950 border-l border-zinc-800/50">
+            <div className="sticky top-0 z-10 bg-zinc-950 border-b border-zinc-800/40 px-5 py-3 flex items-center justify-between">
+              <h2 className="text-sm font-mono font-bold text-zinc-200">Installation Guide &amp; FAQ</h2>
+              <button
+                type="button"
+                onClick={() => setShowGuide(false)}
+                className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800/50"
+              >
+                <FiX className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="p-5">
+              <FaviconGuide />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Previews panel (slide-over) ─────────────────────── */}
+      {showPreviews && (
+        <div className="fixed inset-0 z-50 flex">
+          <button
+            type="button"
+            className="absolute inset-0 bg-zinc-950/80"
+            onClick={() => setShowPreviews(false)}
+            aria-label="Close previews"
+          />
+          <div className="relative ml-auto w-full max-w-2xl h-full overflow-y-auto bg-zinc-950 border-l border-zinc-800/50">
+            <div className="sticky top-0 z-10 bg-zinc-950 border-b border-zinc-800/40 px-5 py-3 flex items-center justify-between">
+              <h2 className="text-sm font-mono font-bold text-zinc-200">Context Previews</h2>
+              <button
+                type="button"
+                onClick={() => setShowPreviews(false)}
+                className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800/50"
+              >
+                <FiX className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="p-5">
+              <FaviconPreviews previews={finalPreviews} title={pageTitle} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

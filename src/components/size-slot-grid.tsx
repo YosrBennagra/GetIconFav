@@ -1,5 +1,5 @@
 import { useCallback, useState, type DragEvent } from 'react';
-import { FiCheck, FiX, FiPlus, FiUploadCloud } from 'react-icons/fi';
+import { FiCheck, FiX, FiPlus, FiUploadCloud, FiAlertTriangle } from 'react-icons/fi';
 import { ICON_SIZES, SIZE_META, ACCEPTED_TYPES, type IconSize } from '../lib/constants';
 
 interface SizeSlotGridProps {
@@ -14,14 +14,14 @@ interface SizeSlotGridProps {
 }
 
 function getSlotClass(isDragOver: boolean, isSelected: boolean): string {
-  if (isDragOver) return 'border-blue-500 bg-blue-500/5 scale-[1.02] shadow-lg shadow-blue-500/10 ring-2 ring-blue-500/20';
-  if (isSelected) return 'border-zinc-700/80 bg-zinc-900/50 hover:border-zinc-600 hover:bg-zinc-900/70';
-  return 'border-zinc-800/40 bg-zinc-900/20 opacity-50 hover:opacity-70';
+  if (isDragOver) return 'border-neon-cyan bg-neon-cyan/5 scale-[1.02]';
+  if (isSelected) return 'border-zinc-700/50 bg-zinc-900/60 hover:border-zinc-600';
+  return 'border-zinc-800/30 bg-zinc-900/20 opacity-50 hover:opacity-70';
 }
 
 function getCategoryColor(category: string): string {
-  if (category === 'essential') return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
-  if (category === 'hd') return 'text-violet-400 bg-violet-400/10 border-violet-400/20';
+  if (category === 'essential') return 'text-neon-cyan bg-neon-cyan/10 border-neon-cyan/20';
+  if (category === 'hd') return 'text-neon-purple bg-neon-purple/10 border-neon-purple/20';
   return 'text-zinc-400 bg-zinc-400/10 border-zinc-400/20';
 }
 
@@ -72,18 +72,20 @@ export function SizeSlotGrid({
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <h2 className="text-base font-semibold text-zinc-200">Icon Sizes</h2>
-          <p className="text-xs text-zinc-500 mt-0.5">
-            Auto-generated from master, or drop individual images to customize
+          <h2 className="text-base font-mono font-semibold text-zinc-200 flex items-center gap-2">
+            <span className="text-neon-cyan">#</span> Icon Sizes
+          </h2>
+          <p className="text-[10px] text-zinc-600 font-mono mt-0.5 uppercase tracking-wider">
+            Auto-generated or drop per-slot overrides
           </p>
         </div>
-        <span className="text-xs tabular-nums text-zinc-400 bg-zinc-800/60 px-2.5 py-1 rounded-full border border-zinc-700/50">
-          {selectedSizes.size} / {ICON_SIZES.length} selected
+        <span className="text-xs tabular-nums font-mono text-neon-cyan/60 bg-neon-cyan/5 px-2.5 py-1 rounded border border-neon-cyan/10">
+          {selectedSizes.size}/{ICON_SIZES.length} active
         </span>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-4 xl:grid-cols-7 gap-2">
         {ICON_SIZES.map((size) => {
           const dataUrl = previews.get(size);
           const isSelected = selectedSizes.has(size);
@@ -116,10 +118,10 @@ export function SizeSlotGrid({
                   className="flex items-center gap-2 group/check"
                 >
                   <div
-                    className={`w-[18px] h-[18px] rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all duration-150 ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-zinc-600 bg-transparent group-hover/check:border-zinc-500'}`}
+                    className={`w-[18px] h-[18px] rounded-[4px] border-2 flex items-center justify-center shrink-0 transition-all duration-150 ${isSelected ? 'border-neon-cyan bg-neon-cyan' : 'border-zinc-600 bg-transparent group-hover/check:border-zinc-500'}`}
                   >
                     {isSelected && (
-                      <FiCheck className="w-2.5 h-2.5 text-white" strokeWidth={3} />
+                      <FiCheck className="w-2.5 h-2.5 text-zinc-950" strokeWidth={3} />
                     )}
                   </div>
                   <span className="text-sm font-mono font-semibold text-zinc-300">{size}&times;{size}</span>
@@ -127,7 +129,7 @@ export function SizeSlotGrid({
 
                 <div className="flex items-center gap-1.5">
                   {isUpscaled && (
-                    <span className="text-amber-400 text-xs" title="Source is smaller than this size — may appear blurry">&#9888;</span>
+                    <FiAlertTriangle className="w-3 h-3 text-amber-400/70" title="Source is smaller than this size — may appear blurry" />
                   )}
                   {isCustom && (
                     <button
@@ -146,8 +148,8 @@ export function SizeSlotGrid({
               <div className="flex-1 flex items-center justify-center px-3 py-4 min-h-[100px]">
                 {isSlotProcessing && (
                   <div className="flex flex-col items-center gap-2">
-                    <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
-                    <span className="text-[10px] text-zinc-500">Processing&hellip;</span>
+                    <div className="w-6 h-6 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin" />
+                    <span className="text-[10px] text-zinc-600 font-mono">Processing&hellip;</span>
                   </div>
                 )}
                 {!isSlotProcessing && dataUrl && (
@@ -169,25 +171,25 @@ export function SizeSlotGrid({
                   </div>
                 )}
                 {!isSlotProcessing && !dataUrl && (
-                  <div className="flex flex-col items-center gap-2 text-zinc-600 py-2">
-                    <div className="w-10 h-10 rounded-lg border-2 border-dashed border-zinc-700 flex items-center justify-center">
-                      <FiPlus className="w-5 h-5" />
+                  <div className="flex flex-col items-center gap-2 text-zinc-700 py-2">
+                    <div className="w-10 h-10 rounded-lg border-2 border-dashed border-neon-cyan/15 flex items-center justify-center">
+                      <FiPlus className="w-5 h-5 text-neon-cyan/30" />
                     </div>
-                    <span className="text-[10px] font-medium">Drop image here</span>
+                    <span className="text-[10px] font-mono font-medium text-zinc-600">Drop here</span>
                   </div>
                 )}
               </div>
 
               {/* Bottom info */}
               <div className="px-3 pb-3 space-y-1.5">
-                <p className="text-[11px] text-zinc-500 leading-tight">{meta.usage}</p>
+                <p className="text-[10px] text-zinc-600 leading-tight font-mono">{meta.usage}</p>
                 <div className="flex items-center gap-1.5">
-                  <span className={`inline-block text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${categoryColor}`}>
+                  <span className={`inline-block text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${categoryColor}`}>
                     {meta.category}
                   </span>
                   {isCustom && (
-                    <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-medium">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="inline-flex items-center gap-1 text-[10px] text-neon-green font-mono font-medium">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
                       Custom
                     </span>
                   )}
@@ -196,10 +198,10 @@ export function SizeSlotGrid({
 
               {/* Drag overlay */}
               {isDragOver && (
-                <div className="absolute inset-0 bg-blue-500/10 backdrop-blur-[2px] flex items-center justify-center z-10">
-                  <div className="flex flex-col items-center gap-1.5 text-blue-400">
+                <div className="absolute inset-0 bg-neon-cyan/5 flex items-center justify-center z-10">
+                  <div className="flex flex-col items-center gap-1.5 text-neon-cyan">
                     <FiUploadCloud className="w-7 h-7" />
-                    <span className="text-xs font-semibold">Drop to set {size}&times;{size}</span>
+                    <span className="text-xs font-mono font-semibold">Set {size}&times;{size}</span>
                   </div>
                 </div>
               )}
@@ -211,9 +213,9 @@ export function SizeSlotGrid({
       {/* Upscale warning */}
       {sourceDimensions !== null &&
         ICON_SIZES.some((s) => s > Math.min(sourceDimensions.width, sourceDimensions.height)) && (
-          <p className="text-xs text-amber-400/70 flex items-center gap-1.5 bg-amber-400/5 px-3 py-2 rounded-lg border border-amber-400/10">
-            <span>&#9888;</span>
-            Sizes larger than your source image ({Math.min(sourceDimensions.width, sourceDimensions.height)}px) may appear blurry.
+          <p className="text-xs text-amber-400/70 font-mono flex items-center gap-1.5 bg-amber-400/5 px-3 py-2 rounded-lg border border-amber-400/10">
+            <FiAlertTriangle className="w-3.5 h-3.5" />
+            Sizes &gt; source ({Math.min(sourceDimensions.width, sourceDimensions.height)}px) may appear blurry
           </p>
         )}
     </div>
