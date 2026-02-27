@@ -20,15 +20,17 @@ export function FaviconPreviews({ previews, title }: FaviconPreviewsProps) {
   return (
     <div className="space-y-5">
       <div>
-        <h3 className="text-base font-semibold text-zinc-200">Live Previews</h3>
-        <p className="text-xs text-zinc-500 mt-0.5">See how your favicon looks across different contexts</p>
+        <h3 className="text-base font-mono font-semibold text-zinc-200 flex items-center gap-2">
+          <span className="text-neon-cyan">&gt;</span> Live Previews
+        </h3>
+        <p className="text-[10px] text-zinc-600 font-mono mt-0.5 uppercase tracking-wider">Simulated rendering contexts</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* ── Browser Tab (Chrome-style) ──────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/40">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Browser Tab</span>
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+          <div className="px-3 py-2 border-b border-zinc-800/30">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-neon-cyan/50">Browser Tab</span>
           </div>
           <div className="p-4">
             <div className="bg-zinc-800/50 rounded-lg border border-zinc-700/40 overflow-hidden">
@@ -62,9 +64,9 @@ export function FaviconPreviews({ previews, title }: FaviconPreviewsProps) {
         </div>
 
         {/* ── Bookmark Bar ────────────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/40">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Bookmarks Bar</span>
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+          <div className="px-3 py-2 border-b border-zinc-800/30">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-neon-cyan/50">Bookmarks Bar</span>
           </div>
           <div className="p-4">
             <div className="bg-zinc-800/50 rounded-lg border border-zinc-700/40 px-3 py-2">
@@ -95,9 +97,9 @@ export function FaviconPreviews({ previews, title }: FaviconPreviewsProps) {
         </div>
 
         {/* ── Google Search Result ─────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/40">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Google Search Result</span>
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+          <div className="px-3 py-2 border-b border-zinc-800/30">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-neon-cyan/50">Google Search Result</span>
           </div>
           <div className="p-4">
             <div className="space-y-1.5">
@@ -105,18 +107,18 @@ export function FaviconPreviews({ previews, title }: FaviconPreviewsProps) {
                 {fav16 && (
                   <img src={fav16} alt="" width={16} height={16} className="shrink-0 rounded-sm" style={{ imageRendering: 'pixelated' }} />
                 )}
-                <span className="text-[11px] text-zinc-400">yourwebsite.com</span>
+                <span className="text-[11px] text-zinc-400 font-mono">yourwebsite.com</span>
               </div>
-              <p className="text-sm text-blue-400 font-medium hover:underline cursor-default">{title} - Your Website</p>
+              <p className="text-sm text-neon-cyan font-medium hover:underline cursor-default">{title} - Your Website</p>
               <p className="text-xs text-zinc-500 leading-relaxed">This is how your website appears in Google search results with your custom favicon displayed next to the URL.</p>
             </div>
           </div>
         </div>
 
         {/* ── Windows Taskbar ──────────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/40">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Windows Taskbar / Desktop</span>
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+          <div className="px-3 py-2 border-b border-zinc-800/30">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-neon-cyan/50">Windows Taskbar / Desktop</span>
           </div>
           <div className="p-4">
             <div className="bg-zinc-800/70 rounded-lg border border-zinc-700/40 px-4 py-3">
@@ -150,9 +152,9 @@ export function FaviconPreviews({ previews, title }: FaviconPreviewsProps) {
         </div>
 
         {/* ── Mobile Home Screen (PWA) ────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/40">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Mobile Home Screen (PWA)</span>
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+          <div className="px-3 py-2 border-b border-zinc-800/30">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-neon-cyan/50">Mobile Home Screen (PWA)</span>
           </div>
           <div className="p-4 flex justify-center">
             <div className="bg-gradient-to-b from-zinc-800/60 to-zinc-800/30 rounded-2xl border border-zinc-700/30 px-6 py-5 w-44">
@@ -181,9 +183,9 @@ export function FaviconPreviews({ previews, title }: FaviconPreviewsProps) {
         </div>
 
         {/* ── macOS Dock ──────────────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/40">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">macOS Dock</span>
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
+          <div className="px-3 py-2 border-b border-zinc-800/30">
+            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-neon-cyan/50">macOS Dock</span>
           </div>
           <div className="p-4 flex justify-center">
             <div className="flex items-end gap-2 bg-zinc-800/40 backdrop-blur rounded-2xl border border-zinc-700/30 px-4 py-2">

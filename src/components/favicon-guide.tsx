@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiCheck, FiChevronDown, FiCopy } from 'react-icons/fi';
+import { FiCheck, FiChevronDown, FiCopy, FiInfo, FiImage, FiGrid, FiPackage, FiTool, FiHelpCircle } from 'react-icons/fi';
 import { FaHtml5, FaReact, FaAngular, FaWordpress } from 'react-icons/fa';
 import { SiNextdotjs } from 'react-icons/si';
 import { FiServer } from 'react-icons/fi';
@@ -125,37 +125,37 @@ export function FaviconGuide() {
     <div className="space-y-10">
       {/* ── Section Divider ──────────────────────────────────── */}
       <div className="flex items-center gap-4">
-        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
-        <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Learn</span>
-        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-neon-purple/20 to-transparent" />
+        <span className="text-[10px] font-mono font-semibold text-neon-purple/60 uppercase tracking-[0.2em]">Knowledge Base</span>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-neon-purple/20 to-transparent" />
       </div>
 
       {/* ── What is a Favicon? ────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
-          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-sm">💡</span>
+        <h2 className="text-xl font-mono font-bold text-zinc-100 flex items-center gap-2">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-neon-cyan/10 border border-neon-cyan/20"><FiInfo className="w-4 h-4 text-neon-cyan" /></span>
           What is a Favicon?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/60 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg">🖼️</div>
-            <h3 className="text-sm font-semibold text-zinc-200">Small but Important</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+          <div className="p-4 rounded-xl bg-zinc-900/60 border border-neon-cyan/10 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neon-cyan/10 border border-neon-cyan/20 flex items-center justify-center"><FiImage className="w-4 h-4 text-neon-cyan" /></div>
+            <h3 className="text-sm font-mono font-semibold text-zinc-200">Small but Important</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed font-mono">
               A favicon (short for &quot;favorite icon&quot;) is a small icon associated with your website. It appears in browser tabs, bookmarks, history, and search results.
             </p>
           </div>
-          <div className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/60 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-lg">📐</div>
-            <h3 className="text-sm font-semibold text-zinc-200">Multiple Sizes Needed</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+          <div className="p-4 rounded-xl bg-zinc-900/60 border border-neon-purple/10 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neon-purple/10 border border-neon-purple/20 flex items-center justify-center"><FiGrid className="w-4 h-4 text-neon-purple" /></div>
+            <h3 className="text-sm font-mono font-semibold text-zinc-200">Multiple Sizes Needed</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed font-mono">
               Different contexts require different sizes. Browser tabs use 16&times;16, taskbars use 32&times;32, and desktop shortcuts use up to 256&times;256 pixels.
             </p>
           </div>
-          <div className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/60 space-y-2">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg">📦</div>
-            <h3 className="text-sm font-semibold text-zinc-200">ICO Format</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              The <code className="text-emerald-400 bg-emerald-400/10 px-1 rounded text-[11px]">.ico</code> format bundles multiple icon sizes into a single file. This ensures your icon looks sharp on every device and display.
+          <div className="p-4 rounded-xl bg-zinc-900/60 border border-neon-green/10 space-y-2">
+            <div className="w-8 h-8 rounded-lg bg-neon-green/10 border border-neon-green/20 flex items-center justify-center"><FiPackage className="w-4 h-4 text-neon-green" /></div>
+            <h3 className="text-sm font-mono font-semibold text-zinc-200">ICO Format</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed font-mono">
+              The <code className="text-neon-green bg-neon-green/10 px-1 rounded text-[11px] font-mono">.ico</code> format bundles multiple icon sizes into a single file. This ensures your icon looks sharp on every device and display.
             </p>
           </div>
         </div>
@@ -163,8 +163,8 @@ export function FaviconGuide() {
 
       {/* ── How to Install ────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
-          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 text-sm">🔧</span>
+        <h2 className="text-xl font-mono font-bold text-zinc-100 flex items-center gap-2">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-neon-purple/10 border border-neon-purple/20"><FiTool className="w-4 h-4 text-neon-purple" /></span>
           How to Install Your Favicon
         </h2>
 
@@ -175,10 +175,10 @@ export function FaviconGuide() {
               key={m.id}
               type="button"
               onClick={() => setActiveTab(m.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-md text-xs font-mono font-semibold transition-all ${
                 activeTab === m.id
-                  ? 'bg-blue-500/15 text-blue-400 border border-blue-500/30'
-                  : 'bg-zinc-800/60 text-zinc-400 border border-zinc-700/40 hover:text-zinc-200 hover:bg-zinc-700/60'
+                  ? 'bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/25'
+                  : 'bg-zinc-900 text-zinc-500 border border-zinc-800/50 hover:text-zinc-300 hover:border-zinc-700'
               }`}
             >
               <m.Icon className="w-3.5 h-3.5 mr-1 inline-block" /> {m.label}
@@ -187,10 +187,10 @@ export function FaviconGuide() {
         </div>
 
         {/* Code panel */}
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-800/40 bg-zinc-900/80">
+        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/60 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-800/30 bg-zinc-950/50">
             <div>
-              <span className="text-sm font-semibold text-zinc-200 flex items-center gap-1.5">
+              <span className="text-sm font-mono font-semibold text-zinc-200 flex items-center gap-1.5">
                 <activeMethod.Icon className="w-4 h-4" />
                 {activeMethod.label}
               </span>
@@ -206,25 +206,25 @@ export function FaviconGuide() {
 
       {/* ── FAQ ───────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
-          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-sm">❓</span>
-          Frequently Asked Questions
+        <h2 className="text-xl font-mono font-bold text-zinc-100 flex items-center gap-2">
+          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-neon-yellow/10 border border-neon-yellow/20"><FiHelpCircle className="w-4 h-4 text-neon-yellow" /></span>
+          FAQ
         </h2>
         <div className="space-y-2">
           {FAQ_ITEMS.map((faq) => (
-            <div key={faq.id} className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
+            <div key={faq.id} className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
               <button
                 type="button"
                 onClick={() => toggleFaq(faq.id)}
-                className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-800/30 transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-800/20 transition-colors"
               >
-                <span className="text-sm font-medium text-zinc-200">{faq.q}</span>
+                <span className="text-sm font-mono font-medium text-zinc-200">{faq.q}</span>
                 <FiChevronDown
                   className={`w-4 h-4 text-zinc-500 shrink-0 ml-3 transition-transform duration-200 ${expandedFaq === faq.id ? 'rotate-180' : ''}`}
                 />
               </button>
               {expandedFaq === faq.id && (
-                <div className="px-4 pb-3 text-xs text-zinc-400 leading-relaxed border-t border-zinc-800/30 pt-3">
+                <div className="px-4 pb-3 text-xs text-zinc-400 leading-relaxed font-mono border-t border-zinc-800/20 pt-3">
                   {faq.a}
                 </div>
               )}
@@ -251,13 +251,13 @@ function CopyButton({ text }: { text: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-semibold
-        bg-zinc-800 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700
-        border border-zinc-700/50 hover:border-zinc-600 transition-all"
+      className="flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-mono font-semibold
+        bg-zinc-900 text-zinc-500 hover:text-neon-cyan hover:border-neon-cyan/30
+        border border-zinc-700/50 transition-all"
     >
       {copied ? (
         <>
-          <FiCheck className="w-3 h-3 text-emerald-400" />
+          <FiCheck className="w-3 h-3 text-neon-green" />
           Copied!
         </>
       ) : (

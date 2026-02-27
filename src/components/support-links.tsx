@@ -1,54 +1,46 @@
 import { FaGithub, FaHeart } from 'react-icons/fa';
 import { SiBuymeacoffee } from 'react-icons/si';
+import { FiShield } from 'react-icons/fi';
 
 export function SupportLinks() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-zinc-800/60 bg-zinc-950/95 backdrop-blur-xl">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-xs text-zinc-500 hidden sm:block">
-          Free &amp; open source — consider supporting!
-        </p>
+    <div className="flex items-center justify-between px-5 h-full">
+      <div className="flex items-center gap-1.5 text-[10px] text-zinc-600 font-mono">
+        <FiShield className="w-3 h-3 text-neon-green/50" />
+        <span>100% client-side processing</span>
+      </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          {/* GitHub */}
-          <a
-            href="https://github.com/YosrBennagra"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-all
-              bg-zinc-900/60 border-zinc-800/60 text-zinc-300
-              hover:bg-zinc-800/80 hover:border-zinc-700 hover:text-zinc-100"
-          >
-            <FaGithub className="w-4 h-4" />
-            <span className="text-xs font-semibold">GitHub</span>
-          </a>
-
-          {/* Sponsor */}
-          <a
-            href="https://github.com/sponsors/YosrBennagra"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-all
-              bg-pink-500/5 border-pink-500/20 text-pink-400
-              hover:bg-pink-500/15 hover:border-pink-500/40 hover:text-pink-300"
-          >
-            <FaHeart className="w-4 h-4" />
-            <span className="text-xs font-semibold">Sponsor</span>
-          </a>
-
-          {/* Buy Me a Coffee */}
-          <a
-            href="https://buymeacoffee.com/veinpal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-all
-              bg-amber-500/5 border-amber-500/20 text-amber-400
-              hover:bg-amber-500/15 hover:border-amber-500/40 hover:text-amber-300"
-          >
-            <SiBuymeacoffee className="w-4 h-4" />
-            <span className="text-xs font-semibold">Buy Me a Coffee</span>
-          </a>
-        </div>
+      <div className="flex items-center gap-0.5">
+        <a
+          href="https://github.com/YosrBennagra"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+          title="GitHub"
+        >
+          <FaGithub className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">GitHub</span>
+        </a>
+        <a
+          href="https://github.com/sponsors/YosrBennagra"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono text-neon-pink/60 hover:text-neon-pink hover:bg-neon-pink/5"
+          title="Sponsor"
+        >
+          <FaHeart className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Sponsor</span>
+        </a>
+        <a
+          href="https://buymeacoffee.com/veinpal"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono text-neon-yellow/60 hover:text-neon-yellow hover:bg-neon-yellow/5"
+          title="Buy me a coffee"
+        >
+          <SiBuymeacoffee className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Coffee</span>
+        </a>
       </div>
     </div>
   );

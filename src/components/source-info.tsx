@@ -1,4 +1,4 @@
-import { FiMaximize, FiFile, FiRefreshCw } from 'react-icons/fi';
+import { FiMaximize, FiFile, FiRefreshCw, FiAlertTriangle } from 'react-icons/fi';
 import { formatFileSize } from '../lib/image-resizer';
 
 interface SourceInfoProps {
@@ -21,39 +21,40 @@ export function SourceInfo({
   onChangeImage,
 }: SourceInfoProps) {
   return (
-    <div className="flex items-center gap-4 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/80 hover:border-zinc-700/80 transition-colors">
+    <div className="flex items-center gap-3 p-3 rounded-lg bg-zinc-900/60 border border-zinc-800/50">
       {/* Thumbnail */}
       <div className="relative">
-        <div className="checkerboard rounded-lg overflow-hidden flex-shrink-0 shadow-md" style={{ width: 60, height: 60 }}>
+        <div className="checkerboard rounded-lg overflow-hidden flex-shrink-0 ring-1 ring-zinc-800" style={{ width: 52, height: 52 }}>
           <img
             src={previewUrl}
             alt="Source"
-            className="w-[60px] h-[60px] object-cover"
+            className="w-[52px] h-[52px] object-cover"
           />
         </div>
         {isSvg && (
-          <span className="absolute -top-1.5 -right-1.5 text-[9px] font-bold uppercase bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">
+          <span className="absolute -top-1 -right-1 text-[8px] font-mono font-bold uppercase bg-neon-green/15 text-neon-green px-1 py-px rounded border border-neon-green/30">
             SVG
           </span>
         )}
       </div>
 
       {/* Info */}
-      <div className="flex-1 min-w-0 space-y-1">
-        <p className="text-sm font-semibold text-zinc-200 truncate">{fileName}</p>
-        <div className="flex items-center gap-3 text-xs text-zinc-500">
+      <div className="flex-1 min-w-0 space-y-0.5">
+        <p className="text-sm font-mono font-medium text-zinc-200 truncate">{fileName}</p>
+        <div className="flex items-center gap-3 text-xs font-mono text-zinc-500">
           <span className="flex items-center gap-1">
-            <FiMaximize className="w-3 h-3" />
+            <FiMaximize className="w-3 h-3 text-zinc-600" />
             {width} × {height}px
           </span>
           <span className="flex items-center gap-1">
-            <FiFile className="w-3 h-3" />
+            <FiFile className="w-3 h-3 text-zinc-600" />
             {formatFileSize(fileSize)}
           </span>
         </div>
         {width !== height && (
-          <p className="text-[11px] text-amber-400/70 flex items-center gap-1">
-            <span>⚠</span> Non-square — will be center-cropped to 1:1
+          <p className="text-[10px] text-amber-400/80 font-mono flex items-center gap-1">
+            <FiAlertTriangle className="w-3 h-3" />
+            Non-square — will be center-cropped
           </p>
         )}
       </div>
@@ -63,14 +64,13 @@ export function SourceInfo({
         type="button"
         onClick={onChangeImage}
         className="
-          flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold
-          bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-zinc-100
-          border border-zinc-700 hover:border-zinc-600
-          transition-all duration-200
+          flex-shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-mono font-medium
+          bg-zinc-900 text-zinc-400 hover:text-neon-pink
+          border border-zinc-700/50 hover:border-neon-pink/30
         "
       >
-        <FiRefreshCw className="w-3.5 h-3.5" />
-        Change
+        <FiRefreshCw className="w-3 h-3" />
+        Swap
       </button>
     </div>
   );
