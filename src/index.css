@@ -18,29 +18,30 @@
   background-color: #18181b;
 }
 
-/* ── Drop zone hover glow ──────────────────────────────────────── */
+/* ── Drop zone hover ───────────────────────────────────────────── */
 .dropzone-active {
-  border-color: #3b82f6 !important;
-  background-color: rgba(59, 130, 246, 0.06) !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 0 30px rgba(59, 130, 246, 0.08);
+  border-color: #00f0ff !important;
+  background-color: rgba(0, 240, 255, 0.04) !important;
 }
 
 /* ── Step indicator active gradient ────────────────────────────── */
 .step-active {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #00f0ff, #b44aff);
 }
 
 /* ── Size slot hover effect ────────────────────────────────────── */
 .size-slot {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s ease;
 }
 .size-slot:hover {
-  transform: translateY(-1px);
+  border-color: rgba(0, 240, 255, 0.2);
 }
 
-/* ── Smooth transitions (exclude transforms to avoid jank) ─────── */
+
+
+/* ── Clean transitions ─────────────────────────────────────────── */
 *, *::before, *::after {
-  transition-property: background-color, border-color, box-shadow, opacity, color;
+  transition-property: background-color, border-color, opacity, color;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -62,7 +63,7 @@
 
 /* ── Selection ─────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(0, 240, 255, 0.2);
   color: #e4e4e7;
 }
 

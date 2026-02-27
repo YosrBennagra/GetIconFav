@@ -1,9 +1,39 @@
 {
   "name": "geticonfav",
-  "private": true,
+  "private": false,
   "version": "2.0.0",
   "type": "module",
   "description": "Free online favicon.ico generator — drag, preview in every context, and download. 100% client-side.",
+  "author": {
+    "name": "Veinpal",
+    "url": "https://github.com/YosrBennagra"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YosrBennagra/GetIconFav.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YosrBennagra/GetIconFav/issues"
+  },
+  "homepage": "https://gifav.veinpal.com",
+  "keywords": [
+    "favicon",
+    "ico",
+    "icon",
+    "converter",
+    "generator",
+    "image",
+    "png-to-ico",
+    "favicon-generator",
+    "react",
+    "typescript",
+    "vite"
+  ],
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
