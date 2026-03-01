@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -9,12 +10,16 @@ export default {
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       colors: {
-        neon: {
-          cyan: '#00f0ff',
-          purple: '#b44aff',
-          green: '#39ff14',
-          pink: '#ff2d95',
-          yellow: '#ffe600',
+        bp: {
+          blue: '#5b9bd5',
+          steel: '#7c8eb5',
+          green: '#4caf7c',
+          red: '#d65f5f',
+          amber: '#e5a84b',
+          navy: '#0b1929',
+          dark: '#0f2035',
+          grid: '#1a3a5c',
+          line: '#1e4a6e',
         },
       },
       animation: {

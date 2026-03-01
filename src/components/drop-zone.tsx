@@ -64,6 +64,7 @@ export function DropZone({ onFileSelected, disabled = false }: DropZoneProps) {
     <div
       role="button"
       tabIndex={0}
+      aria-label="Drop an image file here or click to browse. Accepts SVG, PNG, JPG, WebP, BMP, GIF."
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -75,27 +76,27 @@ export function DropZone({ onFileSelected, disabled = false }: DropZoneProps) {
         relative flex flex-col items-center justify-center gap-5
         w-full h-full p-10
         border-2 border-dashed rounded-xl cursor-pointer
-        ${isDragOver ? 'dropzone-active' : 'border-zinc-700/40 hover:border-neon-cyan/30 bg-zinc-950/50'}
+        ${isDragOver ? 'dropzone-active' : 'border-bp-line/40 hover:border-bp-blue/30 bg-bp-navy/50'}
         ${disabled ? 'opacity-50 pointer-events-none' : ''}
       `}
     >
       {/* Icon */}
-      <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-zinc-900 border border-neon-cyan/20">
-        <FiUploadCloud className="w-8 h-8 text-neon-cyan" />
+      <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-bp-dark border border-bp-blue/20">
+        <FiUploadCloud className="w-8 h-8 text-bp-blue" />
       </div>
 
       {/* Text */}
       <div className="text-center space-y-2">
         <p className="text-lg font-mono font-semibold text-zinc-200">
-          Drop your <span className="text-neon-cyan">source image</span> here
+          Drop your <span className="text-bp-blue">source image</span> here
         </p>
         <p className="text-sm text-zinc-500 leading-relaxed font-mono max-w-md">
-          Use a high-res <span className="text-neon-cyan font-semibold">SVG</span> or{' '}
-          <span className="text-neon-cyan font-semibold">PNG</span> (512px+ recommended) for best results
+          Use a high-res <span className="text-bp-blue font-semibold">SVG</span> or{' '}
+          <span className="text-bp-blue font-semibold">PNG</span> (512px+ recommended) for best results
         </p>
         <p className="text-sm text-zinc-600 font-mono">
           or{' '}
-          <span className="text-neon-purple underline underline-offset-2 decoration-neon-purple/40 hover:decoration-neon-purple cursor-pointer">
+          <span className="text-bp-steel underline underline-offset-2 decoration-bp-steel/40 hover:decoration-bp-steel cursor-pointer">
             browse files
           </span>
         </p>
