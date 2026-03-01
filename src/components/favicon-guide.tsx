@@ -14,38 +14,38 @@ const INSTALL_METHODS: readonly {
   readonly desc: string;
   readonly code: string;
 }[] = [
-  {
-    id: 'html',
-    label: 'HTML',
-    Icon: FaHtml5,
-    desc: 'Standard HTML link tag',
-    code: `<!-- Place favicon.ico in your root directory -->
+    {
+      id: 'html',
+      label: 'HTML',
+      Icon: FaHtml5,
+      desc: 'Standard HTML link tag',
+      code: `<!-- Place favicon.ico in your root directory -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
 <!-- Multiple sizes (recommended): -->
 <link rel="icon" sizes="16x16" href="/favicon-16.ico">
 <link rel="icon" sizes="32x32" href="/favicon-32.ico">
 <link rel="icon" sizes="48x48" href="/favicon-48.ico">`,
-  },
-  {
-    id: 'react',
-    label: 'React / Vite',
-    Icon: FaReact,
-    desc: 'Place in public/ and reference in index.html',
-    code: `<!-- public/index.html or index.html (Vite) -->
+    },
+    {
+      id: 'react',
+      label: 'React / Vite',
+      Icon: FaReact,
+      desc: 'Place in public/ and reference in index.html',
+      code: `<!-- public/index.html or index.html (Vite) -->
 <head>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 
 <!-- Place favicon.ico in the public/ folder -->
 <!-- It will be served from the root automatically -->`,
-  },
-  {
-    id: 'nextjs',
-    label: 'Next.js',
-    Icon: SiNextdotjs,
-    desc: 'App Router: app/ · Pages Router: public/',
-    code: `// App Router (v13+): place favicon.ico in app/
+    },
+    {
+      id: 'nextjs',
+      label: 'Next.js',
+      Icon: SiNextdotjs,
+      desc: 'App Router: app/ · Pages Router: public/',
+      code: `// App Router (v13+): place favicon.ico in app/
 // app/favicon.ico → automatically served
 
 // Pages Router: place in public/
@@ -55,13 +55,13 @@ const INSTALL_METHODS: readonly {
 export const metadata = {
   icons: { icon: '/favicon.ico' },
 }`,
-  },
-  {
-    id: 'wordpress',
-    label: 'WordPress',
-    Icon: FaWordpress,
-    desc: 'Customizer or functions.php',
-    code: `/* Method 1: WordPress Customizer (Recommended) */
+    },
+    {
+      id: 'wordpress',
+      label: 'WordPress',
+      Icon: FaWordpress,
+      desc: 'Customizer or functions.php',
+      code: `/* Method 1: WordPress Customizer (Recommended) */
 /* Dashboard → Appearance → Customize →
    Site Identity → Site Icon */
 
@@ -72,25 +72,25 @@ function custom_favicon() {
     . '/favicon.ico">';
 }
 add_action('wp_head', 'custom_favicon');`,
-  },
-  {
-    id: 'angular',
-    label: 'Angular',
-    Icon: FaAngular,
-    desc: 'Place in src/ and update angular.json',
-    code: `<!-- src/index.html -->
+    },
+    {
+      id: 'angular',
+      label: 'Angular',
+      Icon: FaAngular,
+      desc: 'Place in src/ and update angular.json',
+      code: `<!-- src/index.html -->
 <link rel="icon" type="image/x-icon"
   href="favicon.ico">
 
 <!-- angular.json — ensure in assets: -->
 { "assets": ["src/favicon.ico", "src/assets"] }`,
-  },
-  {
-    id: 'static',
-    label: 'Static / CDN',
-    Icon: FiServer,
-    desc: 'Upload to server root or use explicit path',
-    code: `<!-- Browsers auto-check /favicon.ico -->
+    },
+    {
+      id: 'static',
+      label: 'Static / CDN',
+      Icon: FiServer,
+      desc: 'Upload to server root or use explicit path',
+      code: `<!-- Browsers auto-check /favicon.ico -->
 
 <!-- Explicit path: -->
 <link rel="icon" type="image/x-icon"
@@ -99,8 +99,8 @@ add_action('wp_head', 'custom_favicon');`,
 <!-- CDN-hosted: -->
 <link rel="icon" type="image/x-icon"
   href="https://cdn.example.com/favicon.ico">`,
-  },
-];
+    },
+  ];
 
 // ── FAQ ─────────────────────────────────────────────────────────
 
@@ -161,11 +161,10 @@ export function FaviconGuide() {
               key={m.id}
               type="button"
               onClick={() => setActiveTab(m.id)}
-              className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${
-                activeTab === m.id
+              className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${activeTab === m.id
                   ? 'bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20'
                   : 'text-zinc-600 border border-zinc-800/50 hover:text-zinc-400 hover:border-zinc-700'
-              }`}
+                }`}
             >
               <m.Icon className="w-3 h-3" />
               {m.label}
@@ -207,9 +206,8 @@ export function FaviconGuide() {
               >
                 <span className="text-xs font-medium text-zinc-300">{faq.q}</span>
                 <FiChevronDown
-                  className={`w-3.5 h-3.5 text-zinc-600 shrink-0 ml-2 transition-transform duration-200 ${
-                    expandedFaq === faq.id ? 'rotate-180' : ''
-                  }`}
+                  className={`w-3.5 h-3.5 text-zinc-600 shrink-0 ml-2 transition-transform duration-200 ${expandedFaq === faq.id ? 'rotate-180' : ''
+                    }`}
                 />
               </button>
               {expandedFaq === faq.id && (
