@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiImage, FiRefreshCw, FiDownload, FiBookOpen, FiEye, FiX, FiLock } from 'react-icons/fi';
+import { Analytics } from '@vercel/analytics/react';
 import { ICON_SIZES, type IconSize } from './lib/constants';
 import { encodeIco, type IcoEntry } from './lib/ico-encoder';
 import { blobToDataUrl, formatFileSize, loadImage, resizeImage } from './lib/image-resizer';
@@ -33,7 +34,6 @@ export default function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingSlots, setProcessingSlots] = useState<Set<number>>(new Set());
   const [isDownloading, setIsDownloading] = useState(false);
-  const [showGuide, setShowGuide] = useState(false);
   const [showPreviews, setShowPreviews] = useState(false);
 
   // ── Merged previews & blobs (custom overrides auto) ──────────
@@ -260,15 +260,6 @@ export default function App() {
               <span className="hidden sm:inline">Previews</span>
             </button>
           )}
-          <button
-            type="button"
-            onClick={() => setShowGuide(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
-              text-zinc-500 hover:text-neon-purple border border-zinc-800 hover:border-neon-purple/30"
-          >
-            <FiBookOpen className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Guide</span>
-          </button>
           {hasSource && (
             <button
               type="button"
@@ -287,8 +278,15 @@ export default function App() {
       <main className="flex-1 overflow-hidden">
         {/* Step 1: Upload */}
         {!hasSource && !hasAnyPreview && !isProcessing && (
-          <div className="h-full p-4">
-            <DropZone onFileSelected={handleMasterDrop} disabled={isProcessing} />
+          <div className="h-full flex gap-0">
+            {/* Left: Drop zone */}
+            <div className="flex-1 p-4">
+              <DropZone onFileSelected={handleMasterDrop} disabled={isProcessing} />
+            </div>
+            {/* Right: Installation guide */}
+            <div className="w-[380px] lg:w-[420px] xl:w-[460px] shrink-0 border-l border-zinc-800/40 p-4 overflow-y-auto">
+              <FaviconGuide />
+            </div>
           </div>
         )}
 
@@ -466,33 +464,6 @@ export default function App() {
         <SupportLinks />
       </footer>
 
-      {/* ── Guide panel (slide-over) ────────────────────────── */}
-      {showGuide && (
-        <div className="fixed inset-0 z-50 flex">
-          <button
-            type="button"
-            className="absolute inset-0 bg-zinc-950/80"
-            onClick={() => setShowGuide(false)}
-            aria-label="Close guide"
-          />
-          <div className="relative ml-auto w-full max-w-xl h-full overflow-y-auto bg-zinc-950 border-l border-zinc-800/50">
-            <div className="sticky top-0 z-10 bg-zinc-950 border-b border-zinc-800/40 px-5 py-3 flex items-center justify-between">
-              <h2 className="text-sm font-mono font-bold text-zinc-200">Installation Guide &amp; FAQ</h2>
-              <button
-                type="button"
-                onClick={() => setShowGuide(false)}
-                className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800/50"
-              >
-                <FiX className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="p-5">
-              <FaviconGuide />
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ── Previews panel (slide-over) ─────────────────────── */}
       {showPreviews && (
         <div className="fixed inset-0 z-50 flex">
@@ -519,6 +490,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
