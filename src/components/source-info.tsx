@@ -32,7 +32,7 @@ export function SourceInfo({
           />
         </div>
         {isSvg && (
-          <span className="absolute -top-1 -right-1 text-[8px] font-mono font-bold uppercase bg-neon-green/15 text-neon-green px-1 py-px rounded border border-neon-green/30">
+          <span className="absolute -top-1 -right-1 text-[8px] font-mono font-bold uppercase bg-bp-green/15 text-bp-green px-1 py-px rounded border border-bp-green/30">
             SVG
           </span>
         )}
@@ -65,8 +65,8 @@ export function SourceInfo({
         onClick={onChangeImage}
         className="
           flex-shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-mono font-medium
-          bg-zinc-900 text-zinc-400 hover:text-neon-pink
-          border border-zinc-700/50 hover:border-neon-pink/30
+          bg-zinc-900 text-zinc-400 hover:text-bp-red
+          border border-zinc-700/50 hover:border-bp-red/30
         "
       >
         <FiRefreshCw className="w-3 h-3" />

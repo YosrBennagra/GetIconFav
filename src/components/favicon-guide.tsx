@@ -150,7 +150,7 @@ export function FaviconGuide() {
       {/* ── Install Section ───────────────────────────────── */}
       <div className="space-y-3">
         <h2 className="text-sm font-semibold text-zinc-200 flex items-center gap-2">
-          <FiTool className="w-4 h-4 text-neon-purple" />
+          <FiTool className="w-4 h-4 text-bp-steel" />
           How to Install Your Favicon
         </h2>
 
@@ -162,8 +162,8 @@ export function FaviconGuide() {
               type="button"
               onClick={() => setActiveTab(m.id)}
               className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${activeTab === m.id
-                  ? 'bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20'
-                  : 'text-zinc-600 border border-zinc-800/50 hover:text-zinc-400 hover:border-zinc-700'
+                ? 'bg-bp-blue/10 text-bp-blue border border-bp-blue/20'
+                : 'text-zinc-600 border border-zinc-800/50 hover:text-zinc-400 hover:border-zinc-700'
                 }`}
             >
               <m.Icon className="w-3 h-3" />
@@ -239,11 +239,11 @@ function CopyButton({ text }: { text: string }) {
       type="button"
       onClick={handleCopy}
       className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-mono font-semibold
-        text-zinc-600 hover:text-neon-cyan border border-zinc-800/50 hover:border-neon-cyan/20 transition-all"
+        text-zinc-600 hover:text-bp-blue border border-zinc-800/50 hover:border-bp-blue/20 transition-all"
     >
       {copied ? (
         <>
-          <FiCheck className="w-3 h-3 text-neon-green" />
+          <FiCheck className="w-3 h-3 text-bp-green" />
           Copied
         </>
       ) : (

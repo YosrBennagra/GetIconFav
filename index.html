@@ -39,9 +39,9 @@
   <meta name="twitter:creator" content="@veinpal" />
 
   <!-- Theme Color -->
-  <meta name="theme-color" content="#09090b" />
+  <meta name="theme-color" content="#0b1929" />
   <meta name="msapplication-TileColor" content="#09090b" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -124,7 +124,21 @@
     </script>
 </head>
 
-<body class="bg-zinc-950 text-zinc-100 antialiased">
+<body class="bg-white text-zinc-900 dark:bg-bp-navy dark:text-zinc-100 antialiased">
+  <script>
+    // Set initial theme before React loads to prevent FOUC
+    (function () {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else if (stored === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.classList.remove('dark');
+      }
+      // else: default dark class from HTML tag is kept
+    })();
+  </script>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
