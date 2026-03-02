@@ -12,7 +12,7 @@ const STEPS = [
 
 export function StepIndicator({ currentStep }: StepIndicatorProps) {
   return (
-    <div className="flex items-center gap-1">
+    <nav aria-label="Progress" className="flex items-center gap-1">
       {STEPS.map((step, idx) => {
         const isCompleted = currentStep > step.num;
         const isActive = currentStep === step.num;
@@ -22,10 +22,13 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
           <div key={step.num} className="flex items-center">
             <div className="flex items-center gap-1.5">
               <div
+                role="status"
+                aria-label={`Step ${step.num}: ${step.label} — ${isCompleted ? 'completed' : isActive ? 'current' : 'upcoming'}`}
+                aria-current={isActive ? 'step' : undefined}
                 className={`
                   w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold shrink-0
-                  ${isCompleted ? 'bg-neon-green/15 text-neon-green border border-neon-green/30' : ''}
-                  ${isActive ? 'step-active text-zinc-950' : ''}
+                  ${isCompleted ? 'bg-bp-green/15 text-bp-green border border-bp-green/30' : ''}
+                  ${isActive ? 'step-active text-white' : ''}
                   ${isPending ? 'bg-zinc-900 text-zinc-600 border border-zinc-700/50' : ''}
                 `}
               >
@@ -34,7 +37,7 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
               <span
                 className={`text-xs font-mono font-medium hidden sm:inline
                   ${isActive ? 'text-zinc-200' : ''}
-                  ${isCompleted ? 'text-neon-green/70' : ''}
+                  ${isCompleted ? 'text-bp-green/70' : ''}
                   ${isPending ? 'text-zinc-600' : ''}
                 `}
               >
@@ -42,11 +45,11 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
               </span>
             </div>
             {idx < STEPS.length - 1 && (
-              <div className={`w-6 h-px mx-2 ${currentStep > step.num ? 'bg-neon-green/30' : 'bg-zinc-800'}`} />
+              <div className={`w-6 h-px mx-2 ${currentStep > step.num ? 'bg-bp-green/30' : 'bg-zinc-800'}`} />
             )}
           </div>
         );
       })}
-    </div>
+    </nav>
   );
 }
