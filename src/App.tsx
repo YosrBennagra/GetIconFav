@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiImage, FiRefreshCw, FiDownload, FiEye, FiX, FiLock, FiPackage, FiCode, FiCheck, FiCopy, FiZap, FiSettings, FiSun, FiMoon } from 'react-icons/fi';
+import { FiRefreshCw, FiDownload, FiEye, FiX, FiLock, FiPackage, FiCode, FiCheck, FiCopy, FiZap, FiSettings, FiSun, FiMoon } from 'react-icons/fi';
 import { Analytics } from '@vercel/analytics/react';
 import { ICON_SIZES, PACKAGE_ICONS, ICO_BUNDLE_SIZES, type IconCategory } from './lib/constants';
 import { encodeIco, type IcoEntry } from './lib/ico-encoder';
@@ -452,9 +452,7 @@ export default function App() {
       {/* ── Header ──────────────────────────────────────────── */}
       <header className="h-12 border-b border-zinc-200 dark:border-bp-line/40 shrink-0 flex items-center px-4 gap-4" role="banner">
         <div className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center justify-center w-7 h-7 rounded-md bg-bp-dark border border-bp-line">
-            <FiImage className="w-3.5 h-3.5 text-bp-blue" />
-          </div>
+          <img src="/favicon-32x32.png" alt="GetIconFav logo" width={28} height={28} className="w-7 h-7 rounded-md" />
           <h1 className="text-sm font-bold font-mono tracking-tight">
             <span className="text-bp-blue">Get</span>
             <span className="text-bp-steel">Icon</span>
@@ -474,8 +472,8 @@ export default function App() {
                 type="button"
                 onClick={() => setMode('quick')}
                 className={`flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-mono font-semibold transition-colors ${mode === 'quick'
-                    ? 'bg-bp-blue/10 text-bp-blue border-r border-bp-line'
-                    : 'text-zinc-600 hover:text-zinc-400 border-r border-bp-line'
+                  ? 'bg-bp-blue/10 text-bp-blue border-r border-bp-line'
+                  : 'text-zinc-600 hover:text-zinc-400 border-r border-bp-line'
                   }`}
                 aria-label="Quick mode"
               >
@@ -486,8 +484,8 @@ export default function App() {
                 type="button"
                 onClick={() => setMode('advanced')}
                 className={`flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-mono font-semibold transition-colors ${mode === 'advanced'
-                    ? 'bg-bp-steel/10 text-bp-steel'
-                    : 'text-zinc-600 hover:text-zinc-400'
+                  ? 'bg-bp-steel/10 text-bp-steel'
+                  : 'text-zinc-600 hover:text-zinc-400'
                   }`}
                 aria-label="Advanced mode"
               >
