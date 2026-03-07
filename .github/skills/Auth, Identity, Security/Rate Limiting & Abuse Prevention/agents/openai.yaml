@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rate Limiting & Abuse Prevention"
+  short_description: "Throttle abuse without harming normal users"
+  default_prompt: "Use $rate-limiting-abuse-prevention to design login, API, and abuse controls with clear limits and escalation behavior."

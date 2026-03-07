@@ -1,0 +1,4 @@
+interface:
+  display_name: "Idempotency & Retries"
+  short_description: "Design retry-safe mutating API operations"
+  default_prompt: "Use $idempotency-retries to define idempotency keys, duplicate request behavior, and retry-safe server/client semantics."

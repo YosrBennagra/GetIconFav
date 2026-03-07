@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integration Testing (API-DB)"
+  short_description: "Test real API and persistence boundaries"
+  default_prompt: "Use $integration-testing-api-db to design focused integration tests that verify real API, database, and transaction behavior."

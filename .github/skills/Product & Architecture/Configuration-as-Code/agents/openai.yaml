@@ -1,0 +1,4 @@
+interface:
+  display_name: "Configuration-as-Code"
+  short_description: "Design typed, validated, versioned config"
+  default_prompt: "Use $configuration-as-code to design environment variables, config validation, defaults, and environment layering."

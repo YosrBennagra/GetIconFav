@@ -1,0 +1,4 @@
+interface:
+  display_name: "CI Pipeline Engineering"
+  short_description: "Design reliable, fast repository validation"
+  default_prompt: "Use $ci-pipeline-engineering to design or improve a CI workflow with clear job boundaries, quality gates, and maintainable automation."

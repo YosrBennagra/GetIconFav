@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Hygiene"
+  short_description: "Keep the dependency graph intentional and healthy"
+  default_prompt: "Use $dependency-hygiene to assess package additions, upgrades, removals, and ongoing third-party risk in a repository."

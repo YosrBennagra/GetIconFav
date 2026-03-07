@@ -1,0 +1,4 @@
+interface:
+  display_name: "Preview Deployments"
+  short_description: "Run safe, reviewable ephemeral environments"
+  default_prompt: "Use $preview-deployments to design branch or PR preview environments with safe secrets, data, and teardown behavior."

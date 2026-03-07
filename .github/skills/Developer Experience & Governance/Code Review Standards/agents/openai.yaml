@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Review Standards"
+  short_description: "Review for real risk, not comment volume"
+  default_prompt: "Use $code-review-standards to review a change for regressions, risk, testing gaps, and maintainability in a structured way."

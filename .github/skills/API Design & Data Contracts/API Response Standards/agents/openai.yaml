@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Response Standards"
+  short_description: "Design consistent HTTP response contracts"
+  default_prompt: "Use $api-response-standards to define stable status codes, success payloads, pagination, and empty-response behavior."

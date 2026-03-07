@@ -1,0 +1,4 @@
+interface:
+  display_name: "Error Handling & Problem Details"
+  short_description: "Design machine-readable API error contracts"
+  default_prompt: "Use $error-handling-problem-details to define consistent Problem Details errors, field validation issues, and retry-aware failure semantics."

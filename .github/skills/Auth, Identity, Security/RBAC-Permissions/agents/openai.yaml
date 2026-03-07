@@ -1,0 +1,4 @@
+interface:
+  display_name: "RBAC-Permissions"
+  short_description: "Model and enforce authorization cleanly"
+  default_prompt: "Use $rbac-permissions to design roles, permissions, scopes, and server-side authorization checks."

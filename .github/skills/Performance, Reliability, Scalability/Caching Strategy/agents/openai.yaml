@@ -1,0 +1,4 @@
+interface:
+  display_name: "Caching Strategy"
+  short_description: "Design cache scope, freshness, and invalidation"
+  default_prompt: "Use $caching-strategy to decide whether to cache, where to cache, and how to invalidate safely."

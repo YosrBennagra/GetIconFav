@@ -1,0 +1,4 @@
+interface:
+  display_name: "Versioning & Release Automation"
+  short_description: "Automate version bumps, tags, and release notes"
+  default_prompt: "Use $versioning-release-automation to design a release workflow with explicit version policy, changelog generation, and safe publishing."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Runtime Configuration"
+  short_description: "Separate image build from deploy-time config"
+  default_prompt: "Use $runtime-configuration to define environment variables, secret injection, startup contracts, and runtime limits for a containerized service."

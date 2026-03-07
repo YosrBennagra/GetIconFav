@@ -1,0 +1,4 @@
+interface:
+  display_name: "Consent & Cookie Policy Basics"
+  short_description: "Design clear consent flows and tracker gating"
+  default_prompt: "Use $consent-cookie-policy-basics to classify trackers, design consent UX, and enforce user preferences safely."

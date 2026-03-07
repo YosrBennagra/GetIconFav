@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linting Policy Enforcement"
+  short_description: "Design high-signal lint rules and rollout"
+  default_prompt: "Use $linting-policy-enforcement to design or refine ESLint policy, rule severity, overrides, and suppression standards."

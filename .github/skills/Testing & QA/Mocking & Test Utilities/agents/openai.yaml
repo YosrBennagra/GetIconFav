@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mocking & Test Utilities"
+  short_description: "Use mocks and helpers without losing test signal"
+  default_prompt: "Use $mocking-test-utilities to choose the right test doubles and create reusable helpers without hiding behavior."

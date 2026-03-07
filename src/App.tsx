@@ -102,9 +102,13 @@ export default function App() {
       const previewUrl = URL.createObjectURL(file);
       setMasterImage({ file, element, previewUrl });
 
+      // Read SVG text once so each resize re-renders vectors at native resolution
+      const svgText = file.type === 'image/svg+xml' ? await file.text() : undefined;
+
       const opts: ResizeOptions = {
         bgColor: bgColor || undefined,
         padding,
+        svgText,
       };
 
       // Generate legacy ICO sizes
@@ -133,6 +137,7 @@ export default function App() {
             bgColor: bgColor || undefined,
             padding: icon.maskable ? Math.max(padding, 10) : padding,
             maskable: icon.maskable,
+            svgText,
           };
           const blob = await resizeImageRect(element, icon.width, icon.height, iconOpts);
           const dataUrl = await blobToDataUrl(blob);
@@ -196,9 +201,16 @@ export default function App() {
       setIsProcessing(true);
       try {
         const element = masterImage.element;
+
+        // Re-read SVG text for native-resolution re-rendering
+        const svgText = masterImage.file.type === 'image/svg+xml'
+          ? await masterImage.file.text()
+          : undefined;
+
         const opts: ResizeOptions = {
           bgColor: bgColor || undefined,
           padding,
+          svgText,
         };
 
         const newPreviews = new Map<number, string>();
@@ -225,6 +237,7 @@ export default function App() {
               bgColor: bgColor || undefined,
               padding: icon.maskable ? Math.max(padding, 10) : padding,
               maskable: icon.maskable,
+              svgText,
             };
             const blob = await resizeImageRect(element, icon.width, icon.height, iconOpts);
             const dataUrl = await blobToDataUrl(blob);

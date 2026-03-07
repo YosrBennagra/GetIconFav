@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resilience Patterns"
+  short_description: "Contain failures and degrade safely"
+  default_prompt: "Use $resilience-patterns to design timeouts, retries, fallbacks, and isolation around a failure-prone path."

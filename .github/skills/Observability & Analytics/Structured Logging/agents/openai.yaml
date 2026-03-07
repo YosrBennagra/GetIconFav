@@ -1,0 +1,4 @@
+interface:
+  display_name: "Structured Logging"
+  short_description: "Design queryable, correlated application logs"
+  default_prompt: "Use $structured-logging to define structured events, field conventions, and correlation context for an application."

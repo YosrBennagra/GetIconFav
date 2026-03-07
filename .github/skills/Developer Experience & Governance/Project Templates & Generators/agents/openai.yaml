@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Templates & Generators"
+  short_description: "Turn repeated setup into maintainable scaffolds"
+  default_prompt: "Use $project-templates-generators to design a template or generator with safe defaults, clear parameters, and low drift."
