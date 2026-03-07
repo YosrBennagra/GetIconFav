@@ -1,0 +1,4 @@
+interface:
+  display_name: "Component Library Engineering"
+  short_description: "Design reusable UI component systems"
+  default_prompt: "Use $component-library-engineering to design shared components, stable APIs, variants, and composition patterns."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "E2E Testing (User Flows)"
+  short_description: "Protect critical journeys with reliable E2E tests"
+  default_prompt: "Use $e2e-testing-user-flows to choose critical user journeys and write stable end-to-end tests around them."

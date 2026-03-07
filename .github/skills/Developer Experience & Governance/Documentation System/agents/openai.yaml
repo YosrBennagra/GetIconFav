@@ -1,0 +1,4 @@
+interface:
+  display_name: "Documentation System"
+  short_description: "Keep engineering docs structured and trustworthy"
+  default_prompt: "Use $documentation-system to organize docs by purpose, ownership, and discoverability while keeping them aligned with code changes."

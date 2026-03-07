@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance Monitoring"
+  short_description: "Track latency, throughput, and user experience"
+  default_prompt: "Use $performance-monitoring to define meaningful latency, throughput, and user-experience telemetry with actionable breakdowns."

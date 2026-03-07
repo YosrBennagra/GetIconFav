@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain Modeling"
+  short_description: "Shape business concepts, rules, and boundaries"
+  default_prompt: "Use $domain-modeling to define bounded contexts, entities, invariants, and lifecycle rules before implementation."

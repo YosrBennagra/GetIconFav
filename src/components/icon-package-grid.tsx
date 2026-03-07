@@ -19,12 +19,12 @@ interface IconPackageGridProps {
 
 const CATEGORY_ORDER: IconCategory[] = ['favicon', 'apple', 'android', 'microsoft', 'opengraph', 'appstore'];
 
-const CATEGORY_COLORS: Record<string, { border: string; bg: string; text: string; badge: string }> = {
-    'bp-blue': { border: 'border-sky-400/25', bg: 'bg-sky-400/5', text: 'text-sky-400', badge: 'bg-sky-400/10 text-sky-400 border-sky-400/20' },
-    'bp-red': { border: 'border-rose-400/25', bg: 'bg-rose-400/5', text: 'text-rose-400', badge: 'bg-rose-400/10 text-rose-400 border-rose-400/20' },
-    'bp-green': { border: 'border-emerald-400/25', bg: 'bg-emerald-400/5', text: 'text-emerald-400', badge: 'bg-emerald-400/10 text-emerald-400 border-emerald-400/20' },
-    'bp-steel': { border: 'border-indigo-400/25', bg: 'bg-indigo-400/5', text: 'text-indigo-400', badge: 'bg-indigo-400/10 text-indigo-400 border-indigo-400/20' },
-    'bp-amber': { border: 'border-amber-400/25', bg: 'bg-amber-400/5', text: 'text-amber-400', badge: 'bg-amber-400/10 text-amber-400 border-amber-400/20' },
+const CATEGORY_COLORS: Record<string, { border: string; bg: string; text: string; badge: string; gradient: string }> = {
+    'bp-blue': { border: 'border-violet-500/20', bg: 'bg-violet-500/5', text: 'text-violet-400', badge: 'bg-violet-500/10 text-violet-400 border-violet-500/20', gradient: 'from-violet-500 to-cyan-500' },
+    'bp-red': { border: 'border-rose-500/20', bg: 'bg-rose-500/5', text: 'text-rose-400', badge: 'bg-rose-500/10 text-rose-400 border-rose-500/20', gradient: 'from-rose-500 to-orange-500' },
+    'bp-green': { border: 'border-emerald-500/20', bg: 'bg-emerald-500/5', text: 'text-emerald-400', badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', gradient: 'from-emerald-500 to-teal-500' },
+    'bp-steel': { border: 'border-cyan-500/20', bg: 'bg-cyan-500/5', text: 'text-cyan-400', badge: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20', gradient: 'from-cyan-500 to-blue-500' },
+    'bp-amber': { border: 'border-amber-500/20', bg: 'bg-amber-500/5', text: 'text-amber-400', badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20', gradient: 'from-amber-500 to-yellow-500' },
 };
 
 export function IconPackageGrid({
@@ -61,28 +61,28 @@ export function IconPackageGrid({
             {/* Header with presets */}
             <div className="flex items-center justify-between flex-wrap gap-2">
                 <div>
-                    <h2 className="text-base font-mono font-semibold text-zinc-200 flex items-center gap-2">
-                        <span className="text-bp-blue">#</span> Icon Package
+                    <h2 className="text-base font-semibold text-zinc-200 flex items-center gap-2">
+                        Icon Package
                     </h2>
-                    <p className="text-[10px] text-zinc-600 font-mono mt-0.5 uppercase tracking-wider">
+                    <p className="text-[10px] text-zinc-500 mt-0.5">
                         All icons your app needs — select what to include
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="text-xs tabular-nums font-mono text-bp-blue/60 bg-bp-blue/5 px-2.5 py-1 rounded border border-bp-blue/10">
+                    <span className="text-xs tabular-nums text-violet-400/60 bg-violet-500/5 px-2.5 py-1 rounded-full border border-violet-500/10">
                         {totalSelected}/{totalAvailable} selected
                     </span>
                     <button
                         type="button"
                         onClick={onSelectAll}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-zinc-900 text-zinc-400 hover:text-bp-blue border border-zinc-800 hover:border-bp-blue/30"
+                        className="px-2.5 py-1 rounded-xl text-[11px] font-medium bg-white/5 text-zinc-400 hover:text-violet-300 border border-white/10 hover:border-violet-500/30"
                     >
                         All
                     </button>
                     <button
                         type="button"
                         onClick={onSelectEssential}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-zinc-900 text-zinc-400 hover:text-bp-green border border-zinc-800 hover:border-bp-green/30"
+                        className="px-2.5 py-1 rounded-xl text-[11px] font-medium bg-white/5 text-zinc-400 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30"
                     >
                         Essential
                     </button>
@@ -97,7 +97,7 @@ export function IconPackageGrid({
                 const allSelected = selectedInCat === icons.length;
 
                 return (
-                    <div key={category} className={`rounded-xl border ${colors.border} overflow-hidden`}>
+                    <div key={category} className={`rounded-2xl border ${colors.border} overflow-hidden backdrop-blur-sm bg-white/[0.02]`}>
                         {/* Category header */}
                         <div
                             role="button"
@@ -111,12 +111,12 @@ export function IconPackageGrid({
                                     ? <FiChevronRight className={`w-4 h-4 ${colors.text}`} />
                                     : <FiChevronDown className={`w-4 h-4 ${colors.text}`} />}
                                 <div>
-                                    <span className={`text-sm font-mono font-bold ${colors.text}`}>{meta.label}</span>
-                                    <span className="text-[10px] text-zinc-500 font-mono ml-2">{meta.description}</span>
+                                    <span className={`text-sm font-semibold ${colors.text}`}>{meta.label}</span>
+                                    <span className="text-[10px] text-zinc-500 ml-2">{meta.description}</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${colors.badge}`}>
+                                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${colors.badge}`}>
                                     {selectedInCat}/{icons.length}
                                 </span>
                                 <button
@@ -125,9 +125,9 @@ export function IconPackageGrid({
                                         e.stopPropagation();
                                         onSelectCategory(category, !allSelected);
                                     }}
-                                    className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded border transition-all ${allSelected
-                                            ? 'border-zinc-600 text-zinc-500 hover:text-zinc-300'
-                                            : `${colors.badge} hover:opacity-80`
+                                    className={`text-[10px] font-medium px-2 py-0.5 rounded-full border transition-all ${allSelected
+                                        ? 'border-white/10 text-zinc-500 hover:text-zinc-300'
+                                        : `${colors.badge} hover:opacity-80`
                                         }`}
                                 >
                                     {allSelected ? 'Deselect' : 'Select All'}
@@ -179,29 +179,29 @@ function IconSlot({ icon, preview, isSelected, categoryColor, onToggle, onDownlo
             tabIndex={0}
             onClick={onToggle}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onToggle(); }}
-            className={`relative flex flex-col rounded-lg border overflow-hidden cursor-pointer transition-all duration-150 ${isSelected
-                    ? 'border-zinc-600/60 bg-zinc-900/60 hover:border-zinc-500'
-                    : 'border-zinc-800/30 bg-zinc-900/20 opacity-40 hover:opacity-60'
+            className={`relative flex flex-col rounded-xl border overflow-hidden cursor-pointer transition-all duration-200 ${isSelected
+                ? 'border-white/10 bg-white/5 hover:border-white/20 hover:shadow-glow-sm'
+                : 'border-white/5 bg-white/[0.02] opacity-40 hover:opacity-60'
                 }`}
         >
             {/* Checkbox + label */}
             <div className="flex items-center gap-1.5 px-2.5 pt-2.5 pb-1">
                 <div
                     className={`w-4 h-4 rounded flex items-center justify-center shrink-0 transition-all duration-150 border-2 ${isSelected
-                            ? `${categoryColor.text} border-current bg-current`
-                            : 'border-zinc-600 bg-transparent'
+                        ? `${categoryColor.text} border-current bg-current`
+                        : 'border-zinc-600 bg-transparent'
                         }`}
                 >
                     {isSelected && <FiCheck className="w-2.5 h-2.5 text-white" strokeWidth={3} />}
                 </div>
-                <span className="text-[11px] font-mono font-semibold text-zinc-300 truncate">{icon.label}</span>
+                <span className="text-[11px] font-medium text-zinc-300 truncate">{icon.label}</span>
                 {icon.essential && (
-                    <span className="text-[8px] font-mono font-bold uppercase px-1 py-px rounded bg-bp-green/10 text-bp-green border border-bp-green/20 shrink-0">
+                    <span className="text-[8px] font-semibold uppercase px-1 py-px rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
                         ★
                     </span>
                 )}
                 {icon.maskable && (
-                    <span className="text-[7px] font-mono font-bold uppercase px-1 py-px rounded bg-purple-400/10 text-purple-400 border border-purple-400/20 shrink-0">
+                    <span className="text-[7px] font-semibold uppercase px-1 py-px rounded-full bg-purple-400/10 text-purple-400 border border-purple-400/20 shrink-0">
                         MASK
                     </span>
                 )}
@@ -248,12 +248,12 @@ function IconSlot({ icon, preview, isSelected, categoryColor, onToggle, onDownlo
             {/* Info */}
             <div className="px-2.5 pb-2 space-y-0.5">
                 <div className="flex items-center justify-between gap-1">
-                    <p className="text-[9px] text-zinc-500 font-mono truncate flex-1">{icon.description}</p>
+                    <p className="text-[9px] text-zinc-500 truncate flex-1">{icon.description}</p>
                     {onDownload && preview && (
                         <button
                             type="button"
                             onClick={(e) => { e.stopPropagation(); onDownload(); }}
-                            className="shrink-0 p-0.5 rounded text-zinc-600 hover:text-bp-blue transition-colors"
+                            className="shrink-0 p-0.5 rounded-lg text-zinc-600 hover:text-violet-400 transition-colors"
                             title={`Download ${icon.filename}`}
                             aria-label={`Download ${icon.filename} as PNG`}
                         >

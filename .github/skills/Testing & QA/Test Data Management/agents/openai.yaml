@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Data Management"
+  short_description: "Keep factories, fixtures, and seeds reliable"
+  default_prompt: "Use $test-data-management to design factories, fixtures, seed data, and cleanup strategy for a test suite."

@@ -18,9 +18,9 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
     const isVeryLowRes = sourceSmallest < 128;
 
     return (
-        <div className="rounded-lg border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-            <div className="px-3 py-1.5 border-b border-zinc-800/30">
-                <span className="text-[9px] font-mono font-bold uppercase tracking-wide text-zinc-600">
+        <div className="glass-card overflow-hidden">
+            <div className="px-3 py-1.5 border-b border-white/5">
+                <span className="text-[9px] font-semibold uppercase tracking-wide text-zinc-500">
                     Tiny Preview
                 </span>
             </div>
@@ -39,7 +39,7 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
                                     style={{ imageRendering: 'pixelated' }}
                                 />
                             </div>
-                            <span className="text-[8px] font-mono text-zinc-600">16px</span>
+                            <span className="text-[8px] text-zinc-500">16px</span>
                         </div>
                     )}
                     {fav32 && (
@@ -53,7 +53,7 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
                                     style={{ imageRendering: 'auto' }}
                                 />
                             </div>
-                            <span className="text-[8px] font-mono text-zinc-600">32px</span>
+                            <span className="text-[8px] text-zinc-500">32px</span>
                         </div>
                     )}
                     {fav48 && (
@@ -67,14 +67,14 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
                                     style={{ imageRendering: 'auto' }}
                                 />
                             </div>
-                            <span className="text-[8px] font-mono text-zinc-600">48px</span>
+                            <span className="text-[8px] text-zinc-500">48px</span>
                         </div>
                     )}
 
                     {/* Upscaled view (2x the 16px) */}
                     {fav16 && (
                         <div className="flex flex-col items-center gap-1.5 ml-auto">
-                            <div className="checkerboard rounded overflow-hidden border border-zinc-700/30" style={{ width: 48, height: 48 }}>
+                            <div className="checkerboard rounded overflow-hidden border border-white/10" style={{ width: 48, height: 48 }}>
                                 <img
                                     src={fav16}
                                     alt="16px at 3x"
@@ -83,7 +83,7 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
                                     style={{ imageRendering: 'pixelated' }}
                                 />
                             </div>
-                            <span className="text-[8px] font-mono text-zinc-600">16px @3×</span>
+                            <span className="text-[8px] text-zinc-500">16px @3×</span>
                         </div>
                     )}
                 </div>
@@ -93,7 +93,7 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
                     {isVeryLowRes && (
                         <div className="flex items-start gap-1.5 px-2 py-1.5 rounded-md bg-red-500/5 border border-red-500/20">
                             <FiAlertTriangle className="w-3 h-3 text-red-400 shrink-0 mt-0.5" />
-                            <span className="text-[9px] font-mono text-red-400 leading-relaxed">
+                            <span className="text-[9px] text-red-400 leading-relaxed">
                                 Source image is very small ({sourceSmallest}px). Icons will appear blurry at larger sizes.
                             </span>
                         </div>
@@ -102,15 +102,15 @@ export function TinyPreviewRow({ previews, sourceWidth, sourceHeight }: TinyPrev
                     {isLowRes && !isVeryLowRes && (
                         <div className="flex items-start gap-1.5 px-2 py-1.5 rounded-md bg-yellow-500/5 border border-yellow-500/20">
                             <FiAlertTriangle className="w-3 h-3 text-yellow-400 shrink-0 mt-0.5" />
-                            <span className="text-[9px] font-mono text-yellow-400 leading-relaxed">
+                            <span className="text-[9px] text-yellow-400 leading-relaxed">
                                 Low resolution source ({sourceSmallest}px). Recommend 512×512 or larger for best results.
                             </span>
                         </div>
                     )}
 
-                    <div className="flex items-start gap-1.5 px-2 py-1.5 rounded-md bg-zinc-800/30">
+                    <div className="flex items-start gap-1.5 px-2 py-1.5 rounded-md bg-white/[0.03]">
                         <FiInfo className="w-3 h-3 text-zinc-600 shrink-0 mt-0.5" />
-                        <span className="text-[9px] font-mono text-zinc-600 leading-relaxed">
+                        <span className="text-[9px] text-zinc-500 leading-relaxed">
                             Text and fine details may not be readable at 16×16. Use a simple, bold mark for best results.
                         </span>
                     </div>

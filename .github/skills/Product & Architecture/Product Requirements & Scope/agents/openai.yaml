@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Requirements & Scope"
+  short_description: "Draft PRDs, stories, scope, and milestones"
+  default_prompt: "Use $product-requirements-scope to turn a rough product idea into a PRD, user stories, acceptance criteria, and a milestone plan."

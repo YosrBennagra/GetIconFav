@@ -1,0 +1,16 @@
+{
+    "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/hook-schema.json",
+    "hooks": {
+        "SessionStart": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .github_portable/hooks/scripts/session-context.mjs"
+                    }
+                ]
+            }
+        ]
+    }
+}

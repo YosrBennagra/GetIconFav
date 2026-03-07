@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Flows & Interaction Design"
+  short_description: "Design clearer user journeys and feedback"
+  default_prompt: "Use $ux-flows-interaction-design to map a user flow, reduce friction, and define clearer interaction behavior."

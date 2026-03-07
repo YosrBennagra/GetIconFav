@@ -1,0 +1,4 @@
+interface:
+  display_name: "PII Handling & Redaction"
+  short_description: "Minimize, mask, and control personal data exposure"
+  default_prompt: "Use $pii-handling-redaction to classify personal data, reduce exposure, and define masking or redaction rules."

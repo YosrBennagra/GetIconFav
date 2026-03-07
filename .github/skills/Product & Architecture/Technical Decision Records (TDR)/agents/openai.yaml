@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Decision Records"
+  short_description: "Document architecture decisions and tradeoffs"
+  default_prompt: "Use $technical-decision-records to capture a technical decision, its alternatives, tradeoffs, and consequences in a durable record."

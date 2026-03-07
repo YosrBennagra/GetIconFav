@@ -1,0 +1,4 @@
+interface:
+  display_name: "Concurrency & Load Safety"
+  short_description: "Protect correctness and stability under load"
+  default_prompt: "Use $concurrency-load-safety to design locking, idempotency, backpressure, and overload behavior for a contested path."

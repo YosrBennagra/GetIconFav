@@ -1,0 +1,4 @@
+interface:
+  display_name: "Style Guide Enforcement"
+  short_description: "Turn team conventions into usable standards"
+  default_prompt: "Use $style-guide-enforcement to define or refine a style guide with clear examples, tooling alignment, and low-friction enforcement."

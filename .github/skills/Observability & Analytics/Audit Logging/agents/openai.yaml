@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Logging"
+  short_description: "Record accountable security and admin actions"
+  default_prompt: "Use $audit-logging to define an audit trail for privileged actions, actor attribution, and durable accountability."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operational Readiness"
+  short_description: "Prepare services for safe real-world operation"
+  default_prompt: "Use $operational-readiness to assess healthchecks, shutdown behavior, diagnostics, and recovery posture for a containerized service."

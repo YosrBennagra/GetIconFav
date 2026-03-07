@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dockerfile Best Practices"
+  short_description: "Build lean, cache-friendly, secure images"
+  default_prompt: "Use $dockerfile-best-practices to improve a Dockerfile for image size, cache behavior, and runtime hardening."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Headers & CSP"
+  short_description: "Harden browser responses and script policy"
+  default_prompt: "Use $security-headers-csp to design CSP, transport, framing, and browser security header policy for a web app."
