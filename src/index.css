@@ -2,12 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Blueprint grid background ─────────────────────────────────── */
-.blueprint-grid {
-  background-image:
-    linear-gradient(rgba(91, 155, 213, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(91, 155, 213, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* ── Glassmorphism gradient mesh background ────────────────────── */
+.glass-mesh {
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0d0d1a 100%);
+  position: relative;
+}
+
+.glass-mesh::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 600px at 20% 30%, rgba(124, 58, 237, 0.15), transparent),
+    radial-gradient(ellipse 500px 500px at 80% 70%, rgba(6, 182, 212, 0.1), transparent),
+    radial-gradient(ellipse 400px 400px at 50% 50%, rgba(124, 58, 237, 0.05), transparent);
+  animation: mesh-rotate 15s ease infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes mesh-rotate {
+
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(30deg);
+  }
+}
+
+/* ── Glass card base ───────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
 }
 
 /* ── Checkerboard pattern for transparency preview ─────────────── */
@@ -28,40 +60,100 @@
 
 :is(.dark .checkerboard) {
   background-image:
-    linear-gradient(45deg, #142a42 25%, transparent 25%),
-    linear-gradient(-45deg, #142a42 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #142a42 75%),
-    linear-gradient(-45deg, transparent 75%, #142a42 75%);
-  background-color: #0d1f35;
+    linear-gradient(45deg, #1e1e2e 25%, transparent 25%),
+    linear-gradient(-45deg, #1e1e2e 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1e1e2e 75%),
+    linear-gradient(-45deg, transparent 75%, #1e1e2e 75%);
+  background-color: #13131f;
 }
 
-/* ── Drop zone hover ───────────────────────────────────────────── */
+/* ── Drop zone animated border ─────────────────────────────────── */
 .dropzone-active {
-  border-color: #5b9bd5 !important;
-  background-color: rgba(91, 155, 213, 0.06) !important;
+  border-color: #7c3aed !important;
+  background-color: rgba(124, 58, 237, 0.06) !important;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.15);
+}
+
+.drop-zone-border {
+  background: linear-gradient(90deg, #7c3aed, #06b6d4, #7c3aed, #06b6d4);
+  background-size: 400% 100%;
+  animation: border-flow 4s linear infinite;
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ── Step indicator active gradient ────────────────────────────── */
 .step-active {
-  background: linear-gradient(135deg, #5b9bd5, #7c8eb5);
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
 }
 
 /* ── Size slot hover effect ────────────────────────────────────── */
 .size-slot {
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .size-slot:hover {
-  border-color: rgba(91, 155, 213, 0.25);
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.1);
 }
 
+/* ── Shimmer animation ─────────────────────────────────────────── */
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
 
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.15) 45%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0.15) 55%,
+      transparent 60%);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ── Floating particles ────────────────────────────────────────── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.15;
+  filter: blur(40px);
+}
 
 /* ── Clean transitions ─────────────────────────────────────────── */
 *,
 *::before,
 *::after {
-  transition-property: background-color, border-color, opacity, color;
+  transition-property: background-color, border-color, opacity, color, box-shadow, transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -76,25 +168,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
+  background: rgba(124, 58, 237, 0.2);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
-}
-
-:is(.dark) ::-webkit-scrollbar-thumb {
-  background: #1e4a6e;
-}
-
-:is(.dark) ::-webkit-scrollbar-thumb:hover {
-  background: #2a6090;
+  background: rgba(124, 58, 237, 0.4);
 }
 
 /* ── Selection ─────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(91, 155, 213, 0.25);
+  background: rgba(124, 58, 237, 0.3);
   color: #e4e4e7;
 }
 
@@ -109,11 +193,19 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .glass-mesh::before {
+    animation: none;
+  }
+
+  .shimmer-btn::after {
+    animation: none;
+  }
 }
 
 /* ── Focus visible ring ────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #5b9bd5;
+  outline: 2px solid #7c3aed;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -137,11 +229,11 @@
   left: 4px;
   z-index: 9999;
   padding: 8px 16px;
-  background: #0b1929;
-  color: #5b9bd5;
-  border: 2px solid #5b9bd5;
-  border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace;
+  background: #0d0d1a;
+  color: #7c3aed;
+  border: 2px solid #7c3aed;
+  border-radius: 12px;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;

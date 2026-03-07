@@ -22,10 +22,10 @@ export function AdvancedControls({
     onPaddingChange,
 }: AdvancedControlsProps) {
     return (
-        <div className="rounded-lg border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-            <div className="px-3 py-2 border-b border-zinc-800/30 flex items-center gap-1.5">
-                <FiSliders className="w-3 h-3 text-bp-steel" />
-                <span className="text-[9px] font-mono font-bold uppercase tracking-wide text-zinc-500">
+        <div className="glass-card overflow-hidden">
+            <div className="px-3 py-2 border-b border-white/5 flex items-center gap-1.5">
+                <FiSliders className="w-3 h-3 text-cyan-400" />
+                <span className="text-[9px] font-semibold uppercase tracking-wide text-zinc-400">
                     Advanced Options
                 </span>
             </div>
@@ -35,11 +35,11 @@ export function AdvancedControls({
                 <div className="space-y-2">
                     <div className="flex items-center gap-1.5">
                         <FiDroplet className="w-3 h-3 text-zinc-500" />
-                        <span className="text-[10px] font-mono font-semibold text-zinc-400 uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
                             Background Fill
                         </span>
                     </div>
-                    <p className="text-[9px] font-mono text-zinc-600 leading-relaxed">
+                    <p className="text-[9px] text-zinc-600 leading-relaxed">
                         Fill transparent areas (recommended for Apple icons)
                     </p>
 
@@ -50,9 +50,9 @@ export function AdvancedControls({
                                 type="button"
                                 onClick={() => onBgColorChange(preset.value)}
                                 title={preset.label}
-                                className={`w-6 h-6 rounded-md border-2 transition-all duration-150 flex items-center justify-center ${bgColor === preset.value
-                                        ? 'border-bp-blue scale-110 shadow-[0_0_6px_rgba(91,155,213,0.3)]'
-                                        : 'border-zinc-700 hover:border-zinc-500'
+                                className={`w-6 h-6 rounded-lg border-2 transition-all duration-150 flex items-center justify-center ${bgColor === preset.value
+                                    ? 'border-violet-500 scale-110 shadow-[0_0_6px_rgba(124,58,237,0.3)]'
+                                    : 'border-white/10 hover:border-white/20'
                                     }`}
                             >
                                 {preset.value === '' ? (
@@ -68,9 +68,9 @@ export function AdvancedControls({
 
                         {/* Custom color picker */}
                         <label
-                            className={`relative w-6 h-6 rounded-md border-2 cursor-pointer transition-all duration-150 overflow-hidden ${bgColor && !PRESET_COLORS.some((p) => p.value === bgColor)
-                                    ? 'border-bp-blue scale-110'
-                                    : 'border-zinc-700 hover:border-zinc-500'
+                            className={`relative w-6 h-6 rounded-lg border-2 cursor-pointer transition-all duration-150 overflow-hidden ${bgColor && !PRESET_COLORS.some((p) => p.value === bgColor)
+                                ? 'border-violet-500 scale-110'
+                                : 'border-white/10 hover:border-white/20'
                                 }`}
                             title="Custom color"
                         >
@@ -97,10 +97,10 @@ export function AdvancedControls({
                 {/* Padding Slider */}
                 <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono font-semibold text-zinc-400 uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
                             Padding
                         </span>
-                        <span className="text-[10px] font-mono font-bold text-bp-blue tabular-nums">
+                        <span className="text-[10px] font-semibold text-violet-400 tabular-nums">
                             {padding}%
                         </span>
                     </div>
@@ -111,13 +111,13 @@ export function AdvancedControls({
                         step={1}
                         value={padding}
                         onChange={(e) => onPaddingChange(Number(e.target.value))}
-                        className="w-full h-1 bg-zinc-800 rounded-full appearance-none cursor-pointer
+                        className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer
               [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3
-              [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-bp-blue
-              [&::-webkit-slider-thumb]:shadow-[0_0_6px_rgba(91,155,213,0.4)]
+              [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-violet-500
+              [&::-webkit-slider-thumb]:shadow-[0_0_6px_rgba(124,58,237,0.4)]
               [&::-webkit-slider-thumb]:cursor-pointer"
                     />
-                    <div className="flex justify-between text-[8px] font-mono text-zinc-700">
+                    <div className="flex justify-between text-[8px] text-zinc-600">
                         <span>0%</span>
                         <span>edge-to-edge</span>
                         <span>25%</span>

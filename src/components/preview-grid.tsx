@@ -51,10 +51,9 @@ export function PreviewGrid({
               className={`
                 group relative flex flex-col items-center gap-2 p-3 rounded-xl
                 border-2 transition-all duration-200 cursor-pointer
-                ${
-                  isSelected
-                    ? 'border-blue-500/60 bg-blue-500/5 hover:bg-blue-500/10'
-                    : 'border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/60 opacity-50'
+                ${isSelected
+                  ? 'border-violet-500/60 bg-violet-500/5 hover:bg-violet-500/10'
+                  : 'border-white/5 bg-white/[0.02] hover:bg-white/5 opacity-50'
                 }
               `}
             >
@@ -62,7 +61,7 @@ export function PreviewGrid({
               <div
                 className={`
                   absolute top-2 right-2 w-4 h-4 rounded-md border-2 flex items-center justify-center
-                  ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-zinc-600 bg-transparent'}
+                  ${isSelected ? 'border-violet-500 bg-violet-500' : 'border-zinc-600 bg-transparent'}
                 `}
               >
                 {isSelected && (
@@ -95,7 +94,7 @@ export function PreviewGrid({
               </div>
 
               {/* Size label */}
-              <span className="text-xs font-mono text-zinc-400 group-hover:text-zinc-300">
+              <span className="text-xs text-zinc-400 group-hover:text-zinc-300">
                 {size}×{size}
               </span>
 

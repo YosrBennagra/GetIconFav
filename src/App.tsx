@@ -447,7 +447,7 @@ export default function App() {
   const isSvgSource = masterImage?.file.type === 'image/svg+xml';
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-white dark:bg-bp-navy blueprint-grid">
+    <div className="h-screen flex flex-col overflow-hidden glass-mesh">
       {/* Skip to content (a11y) */}
       <a href="#main-content" className="sr-only-focusable">
         Skip to content
@@ -463,12 +463,12 @@ export default function App() {
       </div>
 
       {/* ── Header ──────────────────────────────────────────── */}
-      <header className="h-12 border-b border-zinc-200 dark:border-bp-line/40 shrink-0 flex items-center px-4 gap-4" role="banner">
-        <div className="flex items-center gap-2 shrink-0">
-          <img src="/favicon-32x32.png" alt="GetIconFav logo" width={28} height={28} className="w-7 h-7 rounded-md" />
-          <h1 className="text-sm font-bold font-mono tracking-tight">
-            <span className="text-bp-blue">Get</span>
-            <span className="text-bp-steel">Icon</span>
+      <header className="h-14 border-b border-white/10 shrink-0 flex items-center px-5 gap-4 bg-white/5 backdrop-blur-xl relative z-10" role="banner">
+        <div className="flex items-center gap-2.5 shrink-0">
+          <img src="/favicon-32x32.png" alt="GetIconFav logo" width={28} height={28} className="w-7 h-7 rounded-lg" />
+          <h1 className="text-sm font-bold tracking-tight">
+            <span className="text-violet-400">Get</span>
+            <span className="text-cyan-400">Icon</span>
             <span className="text-zinc-300">Fav</span>
           </h1>
         </div>
@@ -480,13 +480,13 @@ export default function App() {
         <div className="flex items-center gap-1.5 shrink-0">
           {/* Quick / Advanced toggle */}
           {hasSource && !isProcessing && (
-            <div className="flex items-center rounded-md border border-bp-line overflow-hidden mr-2">
+            <div className="flex items-center rounded-full border border-white/10 overflow-hidden mr-2 bg-white/5">
               <button
                 type="button"
                 onClick={() => setMode('quick')}
-                className={`flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-mono font-semibold transition-colors ${mode === 'quick'
-                  ? 'bg-bp-blue/10 text-bp-blue border-r border-bp-line'
-                  : 'text-zinc-600 hover:text-zinc-400 border-r border-bp-line'
+                className={`flex items-center gap-1 px-3 py-1.5 text-[11px] font-medium transition-colors ${mode === 'quick'
+                  ? 'bg-violet-500/20 text-violet-300'
+                  : 'text-zinc-500 hover:text-zinc-300'
                   }`}
                 aria-label="Quick mode"
               >
@@ -496,9 +496,9 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setMode('advanced')}
-                className={`flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-mono font-semibold transition-colors ${mode === 'advanced'
-                  ? 'bg-bp-steel/10 text-bp-steel'
-                  : 'text-zinc-600 hover:text-zinc-400'
+                className={`flex items-center gap-1 px-3 py-1.5 text-[11px] font-medium transition-colors ${mode === 'advanced'
+                  ? 'bg-cyan-500/20 text-cyan-300'
+                  : 'text-zinc-500 hover:text-zinc-300'
                   }`}
                 aria-label="Advanced mode"
               >
@@ -512,7 +512,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-            className="flex items-center justify-center w-8 h-8 rounded-md text-zinc-500 hover:text-bp-amber border border-bp-line hover:border-bp-amber/30"
+            className="flex items-center justify-center w-8 h-8 rounded-xl text-zinc-400 hover:text-amber-400 border border-white/10 hover:border-amber-400/30 bg-white/5"
             aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`}
             title={`Current: ${theme === 'system' ? 'system' : theme} theme`}
           >
@@ -525,8 +525,8 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setShowPreviews(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
-                  text-zinc-500 hover:text-bp-blue border border-bp-line hover:border-bp-blue/30"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-medium
+                  text-zinc-400 hover:text-violet-300 border border-white/10 hover:border-violet-500/30 bg-white/5"
                 aria-label="Open context previews"
               >
                 <FiEye className="w-3.5 h-3.5" aria-hidden="true" />
@@ -535,8 +535,8 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setShowHtmlSnippet(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
-                  text-zinc-500 hover:text-bp-amber border border-bp-line hover:border-bp-amber/30"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-medium
+                  text-zinc-400 hover:text-cyan-300 border border-white/10 hover:border-cyan-500/30 bg-white/5"
                 aria-label="View HTML snippet"
               >
                 <FiCode className="w-3.5 h-3.5" aria-hidden="true" />
@@ -548,8 +548,8 @@ export default function App() {
             <button
               type="button"
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium
-                text-zinc-500 hover:text-bp-red border border-bp-line hover:border-bp-red/30"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-medium
+                text-zinc-400 hover:text-red-400 border border-white/10 hover:border-red-500/30 bg-white/5"
               aria-label="Reset and start over"
             >
               <FiRefreshCw className="w-3.5 h-3.5" aria-hidden="true" />
@@ -560,16 +560,16 @@ export default function App() {
       </header>
 
       {/* ── Main content ────────────────────────────────────── */}
-      <main id="main-content" className="flex-1 overflow-hidden" role="main">
+      <main id="main-content" className="flex-1 overflow-hidden relative z-10" role="main">
         {/* Step 1: Upload */}
         {!hasSource && !hasAnyPreview && !isProcessing && (
           <div className="h-full flex gap-0">
             {/* Left: Drop zone */}
-            <div className="flex-1 p-4">
+            <div className="flex-1 p-6">
               <DropZone onFileSelected={handleMasterDrop} disabled={isProcessing} />
             </div>
             {/* Right: Installation guide */}
-            <div className="w-[380px] lg:w-[420px] xl:w-[460px] shrink-0 border-l border-zinc-200 dark:border-bp-line/40 p-4 overflow-y-auto">
+            <div className="w-[380px] lg:w-[420px] xl:w-[460px] shrink-0 border-l border-white/10 p-5 overflow-y-auto bg-white/[0.02]">
               <FaviconGuide />
             </div>
           </div>
@@ -577,14 +577,15 @@ export default function App() {
 
         {/* Processing */}
         {isProcessing && (
-          <div className="h-full flex flex-col items-center justify-center gap-4" role="status" aria-busy="true" aria-label="Processing icons">
-            <div className="relative w-14 h-14">
-              <div className="absolute inset-0 border-2 border-bp-blue/20 rounded-full" />
-              <div className="absolute inset-0 border-2 border-bp-blue border-t-transparent rounded-full animate-spin" />
+          <div className="h-full flex flex-col items-center justify-center gap-5" role="status" aria-busy="true" aria-label="Processing icons">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 border-2 border-violet-500/20 rounded-full" />
+              <div className="absolute inset-0 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="absolute inset-2 border-2 border-cyan-500/30 border-b-transparent rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
             </div>
             <div className="text-center">
-              <p className="text-sm font-mono font-medium text-bp-blue">Processing</p>
-              <p className="text-xs text-zinc-600 font-mono mt-1">Generating {PACKAGE_ICONS.length + ICON_SIZES.length} icon variants</p>
+              <p className="text-sm font-medium text-violet-300">Processing</p>
+              <p className="text-xs text-zinc-500 mt-1">Generating {PACKAGE_ICONS.length + ICON_SIZES.length} icon variants</p>
             </div>
           </div>
         )}
@@ -593,7 +594,7 @@ export default function App() {
         {(hasSource || hasAnyPreview) && !isProcessing && (
           <div className="h-full flex">
             {/* Left panel: Source + inline preview */}
-            <div className="w-72 lg:w-80 border-r border-zinc-200 dark:border-bp-line/40 flex flex-col gap-4 p-4 overflow-y-auto shrink-0">
+            <div className="w-72 lg:w-80 border-r border-white/10 flex flex-col gap-4 p-4 overflow-y-auto shrink-0 bg-white/[0.02]">
               {masterImage && (
                 <SourceInfo
                   fileName={masterImage.file.name}
@@ -617,25 +618,25 @@ export default function App() {
 
               {/* Inline browser tab preview */}
               {fav16 && (
-                <div className="rounded-lg border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-                  <div className="px-3 py-1.5 border-b border-zinc-800/30">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wide text-zinc-600">Tab Preview</span>
+                <div className="glass-card overflow-hidden">
+                  <div className="px-3 py-1.5 border-b border-white/5">
+                    <span className="text-[9px] font-semibold uppercase tracking-wide text-zinc-500">Tab Preview</span>
                   </div>
                   <div className="p-3">
-                    <div className="bg-zinc-800/50 rounded-lg border border-zinc-700/40 overflow-hidden">
+                    <div className="bg-zinc-800/50 rounded-xl border border-white/5 overflow-hidden">
                       <div className="flex items-center gap-1.5 px-2.5 pt-2 pb-0">
                         <div className="w-2 h-2 rounded-full bg-red-500/40" />
                         <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
                         <div className="w-2 h-2 rounded-full bg-green-500/40" />
                       </div>
                       <div className="flex items-end px-1.5 pt-1.5">
-                        <div className="flex items-center gap-1.5 bg-zinc-900/80 rounded-t px-2.5 py-1 max-w-[160px] border-t border-x border-zinc-700/40">
+                        <div className="flex items-center gap-1.5 bg-white/5 rounded-t px-2.5 py-1 max-w-[160px] border-t border-x border-white/10">
                           <img src={fav16} alt="" width={14} height={14} className="shrink-0" style={{ imageRendering: 'pixelated' }} />
                           <span className="text-[10px] text-zinc-400 truncate">{pageTitle}</span>
                         </div>
                       </div>
-                      <div className="bg-zinc-900/60 px-2.5 py-1 border-t border-zinc-700/30">
-                        <div className="flex items-center gap-1.5 bg-zinc-800/50 rounded px-2 py-0.5">
+                      <div className="bg-white/[0.02] px-2.5 py-1 border-t border-white/5">
+                        <div className="flex items-center gap-1.5 bg-white/5 rounded-lg px-2 py-0.5">
                           <FiLock className="w-2 h-2 text-emerald-500/50 shrink-0" />
                           <span className="text-[9px] text-zinc-600">{pageUrl}</span>
                         </div>
@@ -645,25 +646,25 @@ export default function App() {
                   {/* Customization inputs */}
                   <div className="px-3 pb-3 space-y-1.5">
                     <div className="flex items-center gap-1.5">
-                      <label htmlFor="custom-title" className="text-[8px] font-mono font-bold text-zinc-600 uppercase tracking-wider w-10 shrink-0">Title</label>
+                      <label htmlFor="custom-title" className="text-[8px] font-semibold text-zinc-500 uppercase tracking-wider w-10 shrink-0">Title</label>
                       <input
                         id="custom-title"
                         type="text"
                         value={customTitle}
                         onChange={(e) => setCustomTitle(e.target.value)}
                         placeholder={defaultTitle}
-                        className="flex-1 text-[10px] font-mono bg-zinc-900/80 border border-zinc-800 rounded px-2 py-1 text-zinc-300 placeholder-zinc-700 focus:border-bp-blue/40 focus:outline-none"
+                        className="flex-1 text-[10px] bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-zinc-300 placeholder-zinc-700 focus:border-violet-500/40 focus:outline-none"
                       />
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <label htmlFor="custom-url" className="text-[8px] font-mono font-bold text-zinc-600 uppercase tracking-wider w-10 shrink-0">URL</label>
+                      <label htmlFor="custom-url" className="text-[8px] font-semibold text-zinc-500 uppercase tracking-wider w-10 shrink-0">URL</label>
                       <input
                         id="custom-url"
                         type="text"
                         value={customUrl}
                         onChange={(e) => setCustomUrl(e.target.value)}
                         placeholder="yourwebsite.com"
-                        className="flex-1 text-[10px] font-mono bg-zinc-900/80 border border-zinc-800 rounded px-2 py-1 text-zinc-300 placeholder-zinc-700 focus:border-bp-blue/40 focus:outline-none"
+                        className="flex-1 text-[10px] bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-zinc-300 placeholder-zinc-700 focus:border-violet-500/40 focus:outline-none"
                       />
                     </div>
                   </div>
@@ -682,69 +683,69 @@ export default function App() {
 
               {/* Package summary with inline copy button */}
               {hasAnyPreview && (
-                <div className="rounded-lg border border-zinc-800/40 bg-zinc-900/40 p-3 space-y-2">
+                <div className="glass-card p-3 space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wide text-zinc-600">Package Contents</span>
+                    <span className="text-[9px] font-semibold uppercase tracking-wide text-zinc-500">Package Contents</span>
                     <button
                       type="button"
                       onClick={handleInlineCopy}
-                      className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-mono font-semibold
-                        text-zinc-600 hover:text-bp-blue border border-zinc-800 hover:border-bp-blue/30 transition-colors"
+                      className="flex items-center gap-1 px-1.5 py-0.5 rounded-lg text-[8px] font-semibold
+                        text-zinc-500 hover:text-violet-300 border border-white/10 hover:border-violet-500/30 transition-colors"
                       title="Copy HTML snippet"
                     >
                       {inlineCopied ? (
-                        <><FiCheck className="w-2.5 h-2.5 text-bp-green" /> Copied</>
+                        <><FiCheck className="w-2.5 h-2.5 text-emerald-400" /> Copied</>
                       ) : (
                         <><FiCopy className="w-2.5 h-2.5" /> HTML</>
                       )}
                     </button>
                   </div>
-                  <div className="space-y-1 text-[10px] font-mono text-zinc-500">
+                  <div className="space-y-1 text-[10px] text-zinc-500">
                     <div className="flex justify-between">
                       <span>favicon.ico</span>
-                      <span className="text-bp-blue">✓</span>
+                      <span className="text-violet-400">✓</span>
                     </div>
                     {isSvgSource && (
                       <>
                         <div className="flex justify-between">
                           <span>favicon.svg</span>
-                          <span className="text-bp-green">✓</span>
+                          <span className="text-cyan-400">✓</span>
                         </div>
                         <div className="flex justify-between">
                           <span>safari-pinned-tab.svg</span>
-                          <span className="text-bp-green">✓</span>
+                          <span className="text-cyan-400">✓</span>
                         </div>
                       </>
                     )}
                     <div className="flex justify-between">
                       <span>PNG icons</span>
-                      <span className="text-bp-blue">{selectedCount}</span>
+                      <span className="text-violet-400">{selectedCount}</span>
                     </div>
                     {selectedIconIds.has('android-maskable-192') && (
                       <div className="flex justify-between">
                         <span>Maskable icons</span>
-                        <span className="text-bp-green">✓</span>
+                        <span className="text-emerald-400">✓</span>
                       </div>
                     )}
                     <div className="flex justify-between">
                       <span>site.webmanifest</span>
-                      <span className="text-bp-blue">✓</span>
+                      <span className="text-violet-400">✓</span>
                     </div>
                     <div className="flex justify-between">
                       <span>browserconfig.xml</span>
-                      <span className="text-bp-blue">✓</span>
+                      <span className="text-violet-400">✓</span>
                     </div>
                     <div className="flex justify-between">
                       <span>HTML snippet</span>
-                      <span className="text-bp-blue">✓</span>
+                      <span className="text-violet-400">✓</span>
                     </div>
                   </div>
                 </div>
               )}
 
               {/* Tip */}
-              <div className="mt-auto px-3 py-2 rounded-lg bg-zinc-900/40 border border-zinc-800/30">
-                <p className="text-[10px] font-mono text-zinc-600 leading-relaxed">
+              <div className="mt-auto px-3 py-2 glass-card">
+                <p className="text-[10px] text-zinc-500 leading-relaxed">
                   {mode === 'quick'
                     ? 'Quick mode selects the essential icons. Switch to Advanced for padding, background color, and fine-tuning.'
                     : 'Select the icon types you need on the right. Adjust background and padding above. The ZIP includes all selected PNGs, .ico, config files, and HTML tags.'}
@@ -769,13 +770,13 @@ export default function App() {
 
               {/* Download bar */}
               {canDownload && (
-                <div className="border-t border-zinc-200 dark:border-bp-line/40 px-4 py-3 flex items-center justify-between shrink-0 bg-white dark:bg-bp-navy">
+                <div className="border-t border-white/10 px-4 py-3 flex items-center justify-between shrink-0 bg-white/5 backdrop-blur-xl">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-bp-green" />
-                      <span className="text-sm font-mono font-medium text-zinc-200">Ready</span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span className="text-sm font-medium text-zinc-200">Ready</span>
                     </div>
-                    <div className="flex items-center gap-3 text-xs font-mono text-zinc-500">
+                    <div className="flex items-center gap-3 text-xs text-zinc-500">
                       <span className="flex items-center gap-1">
                         <FiPackage className="w-3 h-3" />
                         {selectedCount} icons + configs
@@ -793,11 +794,11 @@ export default function App() {
                       type="button"
                       onClick={handleDownloadIco}
                       disabled={isDownloading}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg
-                        bg-zinc-800 text-zinc-300 font-mono font-bold text-xs uppercase tracking-wider
-                        hover:bg-zinc-700 active:bg-zinc-600
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl
+                        bg-white/5 text-zinc-300 font-semibold text-xs uppercase tracking-wider
+                        hover:bg-white/10 active:bg-white/15
                         disabled:opacity-50 disabled:cursor-not-allowed
-                        border border-zinc-700"
+                        border border-white/10"
                     >
                       <FiDownload className="w-3.5 h-3.5" />
                       .ico only
@@ -807,11 +808,12 @@ export default function App() {
                       onClick={handleDownloadZip}
                       disabled={isDownloading}
                       className="
-                        flex items-center gap-2 px-5 py-2 rounded-lg
-                        bg-gradient-to-r from-bp-blue to-bp-steel
-                        text-white font-mono font-bold text-xs uppercase tracking-wider
+                        shimmer-btn flex items-center gap-2 px-5 py-2 rounded-xl
+                        bg-gradient-to-r from-violet-600 to-cyan-500
+                        text-white font-semibold text-xs uppercase tracking-wider
                         hover:opacity-90 active:opacity-80
                         disabled:opacity-50 disabled:cursor-not-allowed
+                        shadow-glow
                       "
                     >
                       {isDownloading ? (
@@ -835,7 +837,7 @@ export default function App() {
       </main>
 
       {/* ── Footer ──────────────────────────────────────────── */}
-      <footer className="h-9 border-t border-zinc-200 dark:border-bp-line/40 shrink-0 bg-white dark:bg-bp-navy">
+      <footer className="h-10 border-t border-white/10 shrink-0 bg-white/5 backdrop-blur-xl relative z-10">
         <SupportLinks />
       </footer>
 
@@ -844,17 +846,17 @@ export default function App() {
         <div className="fixed inset-0 z-50 flex">
           <button
             type="button"
-            className="absolute inset-0 bg-zinc-950/80"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setShowPreviews(false)}
             aria-label="Close previews"
           />
-          <div className="relative ml-auto w-full max-w-3xl h-full overflow-y-auto bg-white dark:bg-bp-navy border-l border-zinc-200 dark:border-bp-line/50">
-            <div className="sticky top-0 z-10 bg-white dark:bg-bp-navy border-b border-zinc-200 dark:border-bp-line/40 px-5 py-3 flex items-center justify-between">
-              <h2 className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">Context Previews</h2>
+          <div className="relative ml-auto w-full max-w-3xl h-full overflow-y-auto glass-mesh border-l border-white/10">
+            <div className="sticky top-0 z-10 bg-white/5 backdrop-blur-xl border-b border-white/10 px-5 py-3 flex items-center justify-between">
+              <h2 className="text-sm font-bold text-zinc-200">Context Previews</h2>
               <button
                 type="button"
                 onClick={() => setShowPreviews(false)}
-                className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800/50"
+                className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-200 hover:bg-white/10"
               >
                 <FiX className="w-4 h-4" />
               </button>
@@ -871,22 +873,22 @@ export default function App() {
         <div className="fixed inset-0 z-50 flex">
           <button
             type="button"
-            className="absolute inset-0 bg-zinc-950/80"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setShowHtmlSnippet(false)}
             aria-label="Close HTML snippet"
           />
-          <div className="relative ml-auto w-full max-w-2xl h-full overflow-y-auto bg-white dark:bg-bp-navy border-l border-zinc-200 dark:border-bp-line/50">
-            <div className="sticky top-0 z-10 bg-white dark:bg-bp-navy border-b border-zinc-200 dark:border-bp-line/40 px-5 py-3 flex items-center justify-between">
-              <h2 className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">HTML Snippet</h2>
+          <div className="relative ml-auto w-full max-w-2xl h-full overflow-y-auto glass-mesh border-l border-white/10">
+            <div className="sticky top-0 z-10 bg-white/5 backdrop-blur-xl border-b border-white/10 px-5 py-3 flex items-center justify-between">
+              <h2 className="text-sm font-bold text-zinc-200">HTML Snippet</h2>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleCopySnippet}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-mono font-medium
-                    text-zinc-400 hover:text-bp-blue border border-zinc-700 hover:border-bp-blue/30"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-medium
+                    text-zinc-400 hover:text-violet-300 border border-white/10 hover:border-violet-500/30"
                 >
                   {snippetCopied ? (
-                    <><FiCheck className="w-3.5 h-3.5 text-bp-green" /> Copied</>
+                    <><FiCheck className="w-3.5 h-3.5 text-emerald-400" /> Copied</>
                   ) : (
                     <><FiCopy className="w-3.5 h-3.5" /> Copy</>
                   )}
@@ -894,17 +896,17 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => setShowHtmlSnippet(false)}
-                  className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800/50"
+                  className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-200 hover:bg-white/10"
                 >
                   <FiX className="w-4 h-4" />
                 </button>
               </div>
             </div>
             <div className="p-5">
-              <p className="text-xs text-zinc-500 font-mono mb-3">
+              <p className="text-xs text-zinc-500 mb-3">
                 Copy and paste this into your HTML {'<head>'} tag. The snippet is auto-generated based on your selected icons.
               </p>
-              <pre className="rounded-lg border border-zinc-800/50 bg-zinc-900/40 px-4 py-3 overflow-x-auto text-[11px] leading-relaxed">
+              <pre className="glass-card px-4 py-3 overflow-x-auto text-[11px] leading-relaxed">
                 <code className="text-zinc-400 font-mono">{htmlSnippet}</code>
               </pre>
             </div>
