@@ -1,0 +1,4 @@
+interface:
+  display_name: "Secrets & Key Management"
+  short_description: "Reduce secret sprawl and rotation risk"
+  default_prompt: "Use $secrets-key-management to design secret storage, least-privilege access, rotation, and incident-safe key handling."

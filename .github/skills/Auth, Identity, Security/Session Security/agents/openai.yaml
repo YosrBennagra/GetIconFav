@@ -1,0 +1,4 @@
+interface:
+  display_name: "Session Security"
+  short_description: "Harden session lifetime and cookie security"
+  default_prompt: "Use $session-security to design cookie settings, token lifetime, rotation, and session invalidation safely."

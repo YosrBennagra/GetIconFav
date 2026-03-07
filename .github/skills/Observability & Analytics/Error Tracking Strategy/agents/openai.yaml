@@ -1,0 +1,4 @@
+interface:
+  display_name: "Error Tracking Strategy"
+  short_description: "Turn production failures into actionable signals"
+  default_prompt: "Use $error-tracking-strategy to define what errors to capture, how to group them, and how to route them for remediation."

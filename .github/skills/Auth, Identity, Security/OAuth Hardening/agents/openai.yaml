@@ -1,0 +1,4 @@
+interface:
+  display_name: "OAuth Hardening"
+  short_description: "Secure provider login and callback flows"
+  default_prompt: "Use $oauth-hardening to review redirect handling, scopes, token exposure, and account-linking safety in an OAuth flow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Retention & Deletion"
+  short_description: "Define enforceable data lifecycle and purge rules"
+  default_prompt: "Use $data-retention-deletion to map data classes, define retention rules, and design deletion workflows."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Webhooks & Event Handling"
+  short_description: "Design signed, retry-safe event delivery"
+  default_prompt: "Use $webhooks-event-handling to define webhook event contracts, signatures, retries, deduplication, and consumer guidance."

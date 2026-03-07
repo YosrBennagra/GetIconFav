@@ -1,0 +1,4 @@
+interface:
+  display_name: "Folder & Module Organization"
+  short_description: "Design code structure and module boundaries"
+  default_prompt: "Use $folder-module-organization to reorganize folders, define module ownership, and clean up dependency direction."

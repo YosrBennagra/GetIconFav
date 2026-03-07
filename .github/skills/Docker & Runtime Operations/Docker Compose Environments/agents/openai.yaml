@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docker Compose Environments"
+  short_description: "Design clean multi-service local and CI stacks"
+  default_prompt: "Use $docker-compose-environments to structure a Compose stack with clear service roles, overrides, and readiness behavior."

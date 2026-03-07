@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unit Testing Strategy"
+  short_description: "Write small, high-signal deterministic unit tests"
+  default_prompt: "Use $unit-testing-strategy to decide what logic deserves unit tests and how to keep those tests precise and maintainable."

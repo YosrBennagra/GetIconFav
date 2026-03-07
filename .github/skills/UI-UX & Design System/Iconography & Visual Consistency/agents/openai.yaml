@@ -1,0 +1,4 @@
+interface:
+  display_name: "Iconography & Visual Consistency"
+  short_description: "Align icons and recurring visual language"
+  default_prompt: "Use $iconography-visual-consistency to standardize icon usage, semantics, and visual language across an interface."

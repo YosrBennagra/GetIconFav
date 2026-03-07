@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility (a11y) Compliance"
+  short_description: "Design inclusive, keyboard-safe interfaces"
+  default_prompt: "Use $accessibility-compliance to audit or improve semantics, keyboard access, focus behavior, and accessible UI feedback."

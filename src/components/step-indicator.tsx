@@ -26,18 +26,18 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
                 aria-label={`Step ${step.num}: ${step.label} — ${isCompleted ? 'completed' : isActive ? 'current' : 'upcoming'}`}
                 aria-current={isActive ? 'step' : undefined}
                 className={`
-                  w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold shrink-0
-                  ${isCompleted ? 'bg-bp-green/15 text-bp-green border border-bp-green/30' : ''}
-                  ${isActive ? 'step-active text-white' : ''}
-                  ${isPending ? 'bg-zinc-900 text-zinc-600 border border-zinc-700/50' : ''}
+                  w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-semibold shrink-0
+                  ${isCompleted ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : ''}
+                  ${isActive ? 'step-active text-white shadow-glow-sm' : ''}
+                  ${isPending ? 'bg-white/5 text-zinc-600 border border-white/10' : ''}
                 `}
               >
                 {isCompleted ? <FiCheck className="w-3 h-3" strokeWidth={3} /> : step.num}
               </div>
               <span
-                className={`text-xs font-mono font-medium hidden sm:inline
+                className={`text-xs font-medium hidden sm:inline
                   ${isActive ? 'text-zinc-200' : ''}
-                  ${isCompleted ? 'text-bp-green/70' : ''}
+                  ${isCompleted ? 'text-emerald-400/70' : ''}
                   ${isPending ? 'text-zinc-600' : ''}
                 `}
               >
@@ -45,7 +45,7 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
               </span>
             </div>
             {idx < STEPS.length - 1 && (
-              <div className={`w-6 h-px mx-2 ${currentStep > step.num ? 'bg-bp-green/30' : 'bg-zinc-800'}`} />
+              <div className={`w-6 h-px mx-2 ${currentStep > step.num ? 'bg-emerald-500/30' : 'bg-white/10'}`} />
             )}
           </div>
         );

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Hooks Governance"
+  short_description: "Design fast, trustworthy local git gates"
+  default_prompt: "Use $git-hooks-governance to design or refine git hooks, local quality gates, and bypass policy for a repository."

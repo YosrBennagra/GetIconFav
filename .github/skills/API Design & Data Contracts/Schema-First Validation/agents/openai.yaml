@@ -1,0 +1,4 @@
+interface:
+  display_name: "Schema-First Validation"
+  short_description: "Design APIs from OpenAPI and JSON Schema first"
+  default_prompt: "Use $schema-first-validation to define an API contract in OpenAPI or JSON Schema before implementation."

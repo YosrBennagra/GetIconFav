@@ -30,20 +30,20 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
   return (
     <div className="space-y-5">
       <div>
-        <h3 className="text-base font-mono font-semibold text-zinc-200 flex items-center gap-2">
-          <span className="text-bp-blue">&gt;</span> Live Previews
+        <h3 className="text-base font-semibold text-zinc-200 flex items-center gap-2">
+          Live Previews
         </h3>
-        <p className="text-[10px] text-zinc-600 font-mono mt-0.5 uppercase tracking-wider">Simulated rendering contexts</p>
+        <p className="text-[10px] text-zinc-500 mt-0.5">Simulated rendering contexts</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* ── Browser Tab (Chrome-style) ──────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/30">
-            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-bp-blue/50">Browser Tab</span>
+        <div className="glass-card overflow-hidden">
+          <div className="px-3 py-2 border-b border-white/5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-400/50">Browser Tab</span>
           </div>
           <div className="p-4">
-            <div className="bg-zinc-800/50 rounded-lg border border-zinc-700/40 overflow-hidden">
+            <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
               {/* Window chrome */}
               <div className="flex items-center gap-1.5 px-3 pt-2.5 pb-0">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
@@ -52,7 +52,7 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
               </div>
               {/* Tab row */}
               <div className="flex items-end px-2 pt-2">
-                <div className="flex items-center gap-2 bg-zinc-900/80 rounded-t-lg px-3 py-1.5 max-w-[180px] border-t border-x border-zinc-700/40">
+                <div className="flex items-center gap-2 bg-zinc-900/80 rounded-t-lg px-3 py-1.5 max-w-[180px] border-t border-x border-white/10">
                   {fav16 && (
                     <img src={fav16} alt="" width={16} height={16} className="shrink-0" style={{ imageRendering: 'pixelated' }} />
                   )}
@@ -63,8 +63,8 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
                 </div>
               </div>
               {/* URL bar */}
-              <div className="bg-zinc-900/60 px-3 py-1.5 border-t border-zinc-700/30">
-                <div className="flex items-center gap-1.5 bg-zinc-800/50 rounded px-2 py-1">
+              <div className="bg-white/[0.03] px-3 py-1.5 border-t border-white/5">
+                <div className="flex items-center gap-1.5 bg-white/5 rounded-lg px-2 py-1">
                   <FiLock className="w-2.5 h-2.5 text-emerald-500/50 shrink-0" />
                   <span className="text-[10px] text-zinc-500">{url}</span>
                 </div>
@@ -74,12 +74,12 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
         </div>
 
         {/* ── Bookmark Bar ────────────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/30">
-            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-bp-blue/50">Bookmarks Bar</span>
+        <div className="glass-card overflow-hidden">
+          <div className="px-3 py-2 border-b border-white/5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-400/50">Bookmarks Bar</span>
           </div>
           <div className="p-4">
-            <div className="bg-zinc-800/50 rounded-lg border border-zinc-700/40 px-3 py-2">
+            <div className="bg-white/5 rounded-xl border border-white/10 px-3 py-2">
               <div className="flex items-center gap-4">
                 {/* Other bookmarks */}
                 <div className="flex items-center gap-1.5 text-zinc-500">
@@ -89,11 +89,11 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
                   <span className="text-[10px]">Google</span>
                 </div>
                 {/* User's favicon bookmark */}
-                <div className="flex items-center gap-1.5 bg-blue-500/5 border border-blue-500/20 rounded px-2 py-1">
+                <div className="flex items-center gap-1.5 bg-violet-500/5 border border-violet-500/20 rounded-lg px-2 py-1">
                   {fav16 && (
                     <img src={fav16} alt="" width={16} height={16} className="shrink-0" style={{ imageRendering: 'pixelated' }} />
                   )}
-                  <span className="text-[10px] text-blue-300 font-medium">{title}</span>
+                  <span className="text-[10px] text-violet-300 font-medium">{title}</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-zinc-500">
                   <div className="w-4 h-4 rounded bg-zinc-700/60 flex items-center justify-center">
@@ -107,9 +107,9 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
         </div>
 
         {/* ── Google Search Result ─────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/30">
-            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-bp-blue/50">Google Search Result</span>
+        <div className="glass-card overflow-hidden">
+          <div className="px-3 py-2 border-b border-white/5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-400/50">Google Search Result</span>
           </div>
           <div className="p-4">
             <div className="space-y-1.5">
@@ -117,21 +117,21 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
                 {fav16 && (
                   <img src={fav16} alt="" width={16} height={16} className="shrink-0 rounded-sm" style={{ imageRendering: 'pixelated' }} />
                 )}
-                <span className="text-[11px] text-zinc-400 font-mono">{url}</span>
+                <span className="text-[11px] text-zinc-400">{url}</span>
               </div>
-              <p className="text-sm text-bp-blue font-medium hover:underline cursor-default">{title} - Your Website</p>
+              <p className="text-sm text-violet-400 font-medium hover:underline cursor-default">{title} - Your Website</p>
               <p className="text-xs text-zinc-500 leading-relaxed">This is how your website appears in Google search results with your custom favicon displayed next to the URL.</p>
             </div>
           </div>
         </div>
 
         {/* ── Windows Taskbar ──────────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/30">
-            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-bp-blue/50">Windows Taskbar / Desktop</span>
+        <div className="glass-card overflow-hidden">
+          <div className="px-3 py-2 border-b border-white/5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-400/50">Windows Taskbar / Desktop</span>
           </div>
           <div className="p-4">
-            <div className="bg-zinc-800/70 rounded-lg border border-zinc-700/40 px-4 py-3">
+            <div className="bg-white/5 rounded-xl border border-white/10 px-4 py-3">
               <div className="flex items-center gap-5">
                 {/* Taskbar icons */}
                 <div className="flex items-center gap-3">
@@ -140,13 +140,13 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
                   {fav32 && (
                     <div className="relative">
                       <img src={fav32} alt="" width={28} height={28} className="rounded" />
-                      <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-blue-400 rounded-full" />
+                      <div className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-violet-400 rounded-full" />
                     </div>
                   )}
                   <div className="w-6 h-6 rounded bg-zinc-700/60" />
                 </div>
                 {/* Desktop icon side */}
-                <div className="border-l border-zinc-700/40 pl-5">
+                <div className="border-l border-white/10 pl-5">
                   <div className="flex flex-col items-center gap-1">
                     {bestLarge && (
                       <div className="checkerboard rounded-md overflow-hidden" style={{ width: 40, height: 40 }}>
@@ -162,12 +162,12 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
         </div>
 
         {/* ── Mobile Home Screen (PWA) ────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/30">
-            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-bp-blue/50">Mobile Home Screen (PWA)</span>
+        <div className="glass-card overflow-hidden">
+          <div className="px-3 py-2 border-b border-white/5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-400/50">Mobile Home Screen (PWA)</span>
           </div>
           <div className="p-4 flex justify-center">
-            <div className="bg-gradient-to-b from-zinc-800/60 to-zinc-800/30 rounded-2xl border border-zinc-700/30 px-6 py-5 w-44">
+            <div className="bg-gradient-to-b from-white/5 to-white/[0.02] rounded-2xl border border-white/10 px-6 py-5 w-44">
               <div className="grid grid-cols-3 gap-3 justify-items-center">
                 <div className="flex flex-col items-center gap-1">
                   <div className="w-11 h-11 rounded-xl bg-zinc-700/50" />
@@ -193,12 +193,12 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
         </div>
 
         {/* ── macOS Dock ──────────────────────────────────────── */}
-        <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-          <div className="px-3 py-2 border-b border-zinc-800/30">
-            <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-bp-blue/50">macOS Dock</span>
+        <div className="glass-card overflow-hidden">
+          <div className="px-3 py-2 border-b border-white/5">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-violet-400/50">macOS Dock</span>
           </div>
           <div className="p-4 flex justify-center">
-            <div className="flex items-end gap-2 bg-zinc-800/40 backdrop-blur rounded-2xl border border-zinc-700/30 px-4 py-2">
+            <div className="flex items-end gap-2 bg-white/5 backdrop-blur rounded-2xl border border-white/10 px-4 py-2">
               <div className="w-10 h-10 rounded-xl bg-zinc-700/40" />
               <div className="w-10 h-10 rounded-xl bg-zinc-700/40" />
               {bestLarge ? (
@@ -216,12 +216,12 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
 
         {/* ── Apple Touch Icon (iOS Home Screen) ──────────────── */}
         {apple180 && (
-          <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-            <div className="px-3 py-2 border-b border-zinc-800/30">
-              <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-pink-400/50">Apple Touch Icon</span>
+          <div className="glass-card overflow-hidden">
+            <div className="px-3 py-2 border-b border-white/5">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-pink-400/50">Apple Touch Icon</span>
             </div>
             <div className="p-4 flex justify-center">
-              <div className="bg-gradient-to-b from-zinc-800/60 to-zinc-800/30 rounded-[2rem] border border-zinc-700/30 px-8 py-6 w-52">
+              <div className="bg-gradient-to-b from-white/5 to-white/[0.02] rounded-[2rem] border border-white/10 px-8 py-6 w-52">
                 <div className="grid grid-cols-3 gap-4 justify-items-center">
                   <div className="flex flex-col items-center gap-1">
                     <div className="w-14 h-14 rounded-[14px] bg-zinc-700/50 shadow-inner" />
@@ -245,21 +245,21 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
 
         {/* ── Open Graph / Facebook ───────────────────────────── */}
         {ogImage && (
-          <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden md:col-span-2">
-            <div className="px-3 py-2 border-b border-zinc-800/30">
-              <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-yellow-400/50">Open Graph Preview (Facebook / LinkedIn)</span>
+          <div className="glass-card overflow-hidden md:col-span-2">
+            <div className="px-3 py-2 border-b border-white/5">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-amber-400/50">Open Graph Preview (Facebook / LinkedIn)</span>
             </div>
             <div className="p-4">
-              <div className="max-w-lg mx-auto bg-zinc-800/50 rounded-lg border border-zinc-700/40 overflow-hidden">
-                <div className="aspect-[1200/630] bg-zinc-900/60 overflow-hidden">
+              <div className="max-w-lg mx-auto bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                <div className="aspect-[1200/630] bg-black/30 overflow-hidden">
                   <img src={ogImage} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div className="px-3 py-2 space-y-1">
-                  <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-wider">{url}</p>
+                  <p className="text-[10px] text-zinc-500 uppercase tracking-wider">{url}</p>
                   <p className="text-sm text-zinc-200 font-medium">{title} - Your Website</p>
                   <p className="text-xs text-zinc-500">Your app description appears here when shared on social media.</p>
                 </div>
-                <div className="flex items-center gap-4 px-3 py-2 border-t border-zinc-700/30">
+                <div className="flex items-center gap-4 px-3 py-2 border-t border-white/5">
                   <div className="flex items-center gap-1 text-zinc-500">
                     <FiHeart className="w-3.5 h-3.5" /><span className="text-xs">Like</span>
                   </div>
@@ -277,19 +277,19 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
 
         {/* ── Twitter Card ────────────────────────────────────── */}
         {twitterCard && (
-          <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden md:col-span-2">
-            <div className="px-3 py-2 border-b border-zinc-800/30">
-              <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-yellow-400/50">Twitter/X Card</span>
+          <div className="glass-card overflow-hidden md:col-span-2">
+            <div className="px-3 py-2 border-b border-white/5">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-amber-400/50">Twitter/X Card</span>
             </div>
             <div className="p-4">
-              <div className="max-w-md mx-auto bg-zinc-800/50 rounded-2xl border border-zinc-700/40 overflow-hidden">
-                <div className="aspect-[2/1] bg-zinc-900/60 overflow-hidden">
+              <div className="max-w-md mx-auto bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                <div className="aspect-[2/1] bg-black/30 overflow-hidden">
                   <img src={twitterCard} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div className="px-3 py-2 space-y-0.5">
                   <p className="text-sm text-zinc-200 font-medium">{title}</p>
                   <p className="text-xs text-zinc-500">Your app description here.</p>
-                  <p className="text-[10px] text-zinc-600 font-mono">{url}</p>
+                  <p className="text-[10px] text-zinc-600">{url}</p>
                 </div>
               </div>
             </div>
@@ -298,9 +298,9 @@ export function FaviconPreviews({ previews, packagePreviews, title, url = 'yourw
 
         {/* ── Windows Tile ────────────────────────────────────── */}
         {msLarge && (
-          <div className="rounded-xl border border-zinc-800/40 bg-zinc-900/40 overflow-hidden">
-            <div className="px-3 py-2 border-b border-zinc-800/30">
-              <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-purple-400/50">Windows Tile</span>
+          <div className="glass-card overflow-hidden">
+            <div className="px-3 py-2 border-b border-white/5">
+              <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-purple-400/50">Windows Tile</span>
             </div>
             <div className="p-4 flex justify-center">
               <div className="bg-[#0078d7] rounded-lg overflow-hidden flex items-center justify-center" style={{ width: 120, height: 120 }}>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Patterns & Refactoring"
+  short_description: "Refactor safely and choose patterns well"
+  default_prompt: "Use $design-patterns-refactoring to simplify code structure, choose suitable patterns, and refactor without changing intended behavior."

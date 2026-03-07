@@ -1,0 +1,4 @@
+interface:
+  display_name: "Responsive Layout Engineering"
+  short_description: "Build resilient layouts across screen sizes"
+  default_prompt: "Use $responsive-layout-engineering to design or fix responsive layouts, breakpoint behavior, and adaptive component patterns."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Background Jobs Pattern"
+  short_description: "Design safe, observable async job workflows"
+  default_prompt: "Use $background-jobs-pattern to move work off the request path with clear job contracts, retries, and worker safety."
