@@ -30,7 +30,7 @@ export function SupportLinks() {
           <FaHeart className="w-3.5 h-3.5" />
         </a>
         <a
-          href="https://buymeacoffee.com/veinpal"
+          href="https://buymeacoffee.com/yosrbennagra"
           target="_blank"
           rel="noopener noreferrer"
           title="Buy me a coffee"
