@@ -26,10 +26,10 @@ export default defineConfig({
         'site.webmanifest',
       ],
       manifest: {
-        name: 'GetIconFav — Favicon Generator',
+        name: 'GetIconFav — Free Favicon Generator & ICO Converter',
         short_name: 'GetIconFav',
         description:
-          'Free online favicon.ico generator. Convert PNG, JPG, SVG, WebP to multi-size ICO files. 100% client-side.',
+          'Free online favicon generator and ICO converter. Convert PNG, SVG, JPG, WebP to multi-size .ico files. Generate Apple Touch Icons, PWA icons, MSIX Store assets, Open Graph images. 100% client-side.',
         theme_color: '#09090b',
         background_color: '#09090b',
         display: 'standalone',

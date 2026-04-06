@@ -40,7 +40,7 @@ export const SIZE_META: Record<IconSize, { usage: string; category: 'essential' 
 
 // ── Comprehensive Icon Package Types ─────────────────────────────
 
-export type IconCategory = 'favicon' | 'apple' | 'android' | 'microsoft' | 'opengraph' | 'appstore';
+export type IconCategory = 'favicon' | 'apple' | 'android' | 'microsoft' | 'msixstore' | 'opengraph' | 'appstore';
 
 export interface PackageIcon {
   readonly id: string;
@@ -84,7 +84,17 @@ export const PACKAGE_ICONS: readonly PackageIcon[] = [
   { id: 'ms-70', filename: 'mstile-70x70.png', width: 70, height: 70, category: 'microsoft', label: '70×70', description: 'Small tile', essential: false },
   { id: 'ms-144', filename: 'mstile-144x144.png', width: 144, height: 144, category: 'microsoft', label: '144×144', description: 'Medium tile (pinned)', essential: true },
   { id: 'ms-150', filename: 'mstile-150x150.png', width: 150, height: 150, category: 'microsoft', label: '150×150', description: 'Medium tile', essential: true },
+  { id: 'ms-310w', filename: 'mstile-310x150.png', width: 310, height: 150, category: 'microsoft', label: '310×150', description: 'Wide tile', essential: false },
   { id: 'ms-310', filename: 'mstile-310x310.png', width: 310, height: 310, category: 'microsoft', label: '310×310', description: 'Large tile', essential: true },
+
+  // ── MSIX Store Visual Assets ─────────────────────────
+  { id: 'msix-store-logo', filename: 'StoreLogo.png', width: 50, height: 50, category: 'msixstore', label: '50×50', description: 'Package manifest logo', essential: true },
+  { id: 'msix-44', filename: 'Square44x44Logo.png', width: 44, height: 44, category: 'msixstore', label: '44×44', description: 'Taskbar / Start all-apps', essential: true },
+  { id: 'msix-71', filename: 'SmallTile.png', width: 71, height: 71, category: 'msixstore', label: '71×71', description: 'Start small tile', essential: true },
+  { id: 'msix-150', filename: 'Square150x150Logo.png', width: 150, height: 150, category: 'msixstore', label: '150×150', description: 'Start medium tile', essential: true },
+  { id: 'msix-310w', filename: 'Wide310x150Logo.png', width: 310, height: 150, category: 'msixstore', label: '310×150', description: 'Start wide tile', essential: false },
+  { id: 'msix-310', filename: 'LargeTile.png', width: 310, height: 310, category: 'msixstore', label: '310×310', description: 'Start large tile', essential: true },
+  { id: 'msix-splash', filename: 'SplashScreen.png', width: 620, height: 300, category: 'msixstore', label: '620×300', description: 'App splash screen', essential: false },
 
   // ── Open Graph / Social ─────────────────────
   { id: 'og-image', filename: 'og-image.png', width: 1200, height: 630, category: 'opengraph', label: '1200×630', description: 'Open Graph (Facebook, LinkedIn)', essential: true },
@@ -101,6 +111,7 @@ export const CATEGORY_META: Record<IconCategory, { label: string; color: string;
   apple: { label: 'Apple Touch', color: 'bp-red', description: 'iOS home screen, Safari' },
   android: { label: 'Android / PWA', color: 'bp-green', description: 'PWA manifest, Android launcher' },
   microsoft: { label: 'Microsoft', color: 'bp-steel', description: 'Windows tiles, pinned sites' },
+  msixstore: { label: 'MSIX Store', color: 'bp-indigo', description: 'Windows Store / MSIX package assets' },
   opengraph: { label: 'Open Graph', color: 'bp-amber', description: 'Social media sharing cards' },
   appstore: { label: 'App Store', color: 'bp-blue', description: 'iOS App Store, Google Play, social avatar' },
 };

@@ -60,10 +60,12 @@ function generateBrowserConfig(icons: readonly PackageIcon[], themeColor: string
     const tile150 = icons.find((i) => i.id === 'ms-150');
     const tile310 = icons.find((i) => i.id === 'ms-310');
     const tile70 = icons.find((i) => i.id === 'ms-70');
+    const tile310w = icons.find((i) => i.id === 'ms-310w');
 
     let tiles = '';
     if (tile70) tiles += `        <square70x70logo src="/${tile70.filename}"/>\n`;
     if (tile150) tiles += `        <square150x150logo src="/${tile150.filename}"/>\n`;
+    if (tile310w) tiles += `        <wide310x150logo src="/${tile310w.filename}"/>\n`;
     if (tile310) tiles += `        <square310x310logo src="/${tile310.filename}"/>\n`;
     if (tile144) tiles += `        <square144x144logo src="/${tile144.filename}"/>\n`;
 
@@ -206,6 +208,46 @@ export async function generatePackageZip(options: PackageOptions): Promise<Blob>
     // Always include HTML snippet
     const htmlSnippet = generateHtmlSnippet(selectedIcons, icoEntries.length > 0, isSvg === true);
     zip.file('html-snippet.txt', htmlSnippet);
+
+    return zip.generateAsync({ type: 'blob' });
+}
+
+export interface CategoryZipOptions {
+    /** Map of icon id → PNG blob */
+    readonly blobs: ReadonlyMap<string, Blob>;
+    /** Icons selected in this category */
+    readonly categoryIcons: readonly PackageIcon[];
+    /** Category name (used for context-specific config files) */
+    readonly category: string;
+    /** App name for manifest */
+    readonly appName: string;
+    /** Theme color */
+    readonly themeColor: string;
+    /** Background color */
+    readonly bgColor: string;
+}
+
+/**
+ * Generate a ZIP containing only a single category's icons + relevant configs.
+ */
+export async function generateCategoryZip(options: CategoryZipOptions): Promise<Blob> {
+    const { blobs, categoryIcons, category, appName, themeColor, bgColor } = options;
+    const zip = new JSZip();
+
+    for (const icon of categoryIcons) {
+        const blob = blobs.get(icon.id);
+        if (blob) {
+            zip.file(icon.filename, blob);
+        }
+    }
+
+    if (category === 'android') {
+        zip.file('site.webmanifest', generateManifest(categoryIcons, appName, themeColor, bgColor));
+    }
+
+    if (category === 'microsoft') {
+        zip.file('browserconfig.xml', generateBrowserConfig(categoryIcons, themeColor));
+    }
 
     return zip.generateAsync({ type: 'blob' });
 }
