@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { ICON_SIZES, PACKAGE_ICONS, ICO_BUNDLE_SIZES, type IconCategory } from './lib/constants';
 import { encodeIco, type IcoEntry } from './lib/ico-encoder';
 import { blobToDataUrl, formatFileSize, loadImage, resizeImage, resizeImageRect, type ResizeOptions } from './lib/image-resizer';
-import { generatePackageZip } from './lib/package-generator';
+import { generatePackageZip, generateCategoryZip } from './lib/package-generator';
 import { useTheme } from './lib/use-theme';
 import { DropZone } from './components/drop-zone';
 import { SourceInfo } from './components/source-info';
@@ -41,6 +41,7 @@ export default function App() {
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [showPreviews, setShowPreviews] = useState(false);
   const [showHtmlSnippet, setShowHtmlSnippet] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
@@ -93,6 +94,7 @@ export default function App() {
 
   const handleMasterDrop = useCallback(async (file: File) => {
     setIsProcessing(true);
+    setLoadError(null);
     setAutoPreviews(new Map());
     setAutoBlobs(new Map());
     setPackagePreviews(new Map());
@@ -151,6 +153,7 @@ export default function App() {
       setPackageBlobs(pkgBlobs);
     } catch {
       setMasterImage(null);
+      setLoadError('Failed to load image. Please try a different file.');
     } finally {
       setIsProcessing(false);
     }
@@ -330,6 +333,39 @@ export default function App() {
     }
   }, [packageBlobs, selectedIconIds, autoBlobs, masterImage, bgColor]);
 
+  // ── Download single category ZIP ─────────────────────────────
+
+  const handleDownloadCategory = useCallback(async (category: IconCategory) => {
+    if (packageBlobs.size === 0) return;
+    setIsDownloading(true);
+    try {
+      const categoryIcons = PACKAGE_ICONS.filter(
+        (i) => i.category === category && selectedIconIds.has(i.id)
+      );
+      if (categoryIcons.length === 0) return;
+
+      const zipBlob = await generateCategoryZip({
+        blobs: packageBlobs,
+        categoryIcons,
+        category,
+        appName: masterImage?.file.name.replace(/\.[^.]+$/, '') ?? 'MyApp',
+        themeColor: '#ffffff',
+        bgColor: bgColor || '#ffffff',
+      });
+
+      const url = URL.createObjectURL(zipBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${category}-icons.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } finally {
+      setIsDownloading(false);
+    }
+  }, [packageBlobs, selectedIconIds, masterImage, bgColor]);
+
   // ── Generate HTML snippet ────────────────────────────────────
 
   const htmlSnippet = useMemo(() => {
@@ -380,6 +416,13 @@ export default function App() {
       lines.push('<meta name="msapplication-config" content="/browserconfig.xml">');
     }
 
+    const msixIcons = selected.filter((i) => i.category === 'msixstore');
+    if (msixIcons.length) {
+      lines.push('');
+      lines.push('<!-- MSIX Store Visual Assets (packaged in MSIX, not in HTML head) -->');
+      lines.push(`<!-- ${msixIcons.length} store asset(s) included in your download -->`);
+    }
+
     const ogIcons = selected.filter((i) => i.category === 'opengraph');
     if (ogIcons.length) {
       lines.push('');
@@ -423,6 +466,7 @@ export default function App() {
     setPackageBlobs(new Map());
     setSelectedIconIds(new Set(PACKAGE_ICONS.filter((i) => i.essential).map((i) => i.id)));
     setShowHtmlSnippet(false);
+    setLoadError(null);
     setBgColor('');
     setPadding(0);
     setMode('quick');
@@ -437,6 +481,20 @@ export default function App() {
       if (masterImage?.previewUrl) URL.revokeObjectURL(masterImage.previewUrl);
     };
   }, [masterImage]);
+
+  // ── Escape key closes slide-overs ────────────────────────────
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (showPreviews) setShowPreviews(false);
+        else if (showHtmlSnippet) setShowHtmlSnippet(false);
+        else if (showGuide) setShowGuide(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showPreviews, showHtmlSnippet, showGuide]);
 
   // ── Derived values ───────────────────────────────────────────
 
@@ -571,17 +629,32 @@ export default function App() {
               {/* Hero text */}
               <div className="text-center space-y-3">
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                  <span className="text-zinc-100">Generate your </span>
-                  <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">icon package</span>
+                  <span className="text-zinc-100">Free Favicon Generator &amp; </span>
+                  <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">ICO Converter</span>
                 </h2>
                 <p className="text-zinc-500 text-base max-w-lg mx-auto leading-relaxed">
-                  Drop a single source image to create favicons, Apple touch icons, Android PWA icons,
-                  Open Graph images, and more — all in one click.
+                  Convert PNG, SVG, JPG or WebP to multi-size <strong className="text-zinc-400">.ico</strong> files.
+                  Generate favicons, Apple Touch Icons, PWA icons, Microsoft tiles,
+                  MSIX Store assets, and Open Graph images — all in one click.
+                </p>
+                <p className="text-zinc-600 text-sm max-w-md mx-auto">
+                  100% client-side — your images are processed locally and never uploaded.
                 </p>
               </div>
 
               {/* Drop zone */}
               <DropZone onFileSelected={handleMasterDrop} disabled={isProcessing} />
+
+              {/* Error message */}
+              {loadError && (
+                <div className="flex items-center justify-center gap-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2.5">
+                  <FiX className="w-4 h-4 shrink-0" />
+                  <span>{loadError}</span>
+                  <button type="button" onClick={() => setLoadError(null)} className="ml-2 text-red-400/60 hover:text-red-300">
+                    Dismiss
+                  </button>
+                </div>
+              )}
 
               {/* Trust signals */}
               <div className="flex items-center justify-center gap-6 flex-wrap text-[11px] text-zinc-600">
@@ -740,14 +813,24 @@ export default function App() {
                         <span className="text-emerald-400">✓</span>
                       </div>
                     )}
-                    <div className="flex justify-between">
-                      <span>site.webmanifest</span>
-                      <span className="text-violet-400">✓</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>browserconfig.xml</span>
-                      <span className="text-violet-400">✓</span>
-                    </div>
+                    {[...selectedIconIds].some((id) => PACKAGE_ICONS.find((i) => i.id === id)?.category === 'android') && (
+                      <div className="flex justify-between">
+                        <span>site.webmanifest</span>
+                        <span className="text-violet-400">✓</span>
+                      </div>
+                    )}
+                    {[...selectedIconIds].some((id) => PACKAGE_ICONS.find((i) => i.id === id)?.category === 'microsoft') && (
+                      <div className="flex justify-between">
+                        <span>browserconfig.xml</span>
+                        <span className="text-violet-400">✓</span>
+                      </div>
+                    )}
+                    {[...selectedIconIds].some((id) => PACKAGE_ICONS.find((i) => i.id === id)?.category === 'msixstore') && (
+                      <div className="flex justify-between">
+                        <span>MSIX Store Assets</span>
+                        <span className="text-indigo-400">✓</span>
+                      </div>
+                    )}
                     <div className="flex justify-between">
                       <span>HTML snippet</span>
                       <span className="text-violet-400">✓</span>
@@ -795,6 +878,7 @@ export default function App() {
               onSelectAll={handleSelectAll}
               onSelectEssential={handleSelectEssential}
               onDownloadPng={handleDownloadPng}
+              onDownloadCategory={handleDownloadCategory}
             />
           </div>
         )}

@@ -15,15 +15,17 @@ interface IconPackageGridProps {
     readonly onSelectAll: () => void;
     readonly onSelectEssential: () => void;
     readonly onDownloadPng?: (id: string) => void;
+    readonly onDownloadCategory?: (category: IconCategory) => void;
 }
 
-const CATEGORY_ORDER: IconCategory[] = ['favicon', 'apple', 'android', 'microsoft', 'opengraph', 'appstore'];
+const CATEGORY_ORDER: IconCategory[] = ['favicon', 'apple', 'android', 'microsoft', 'msixstore', 'opengraph', 'appstore'];
 
 const CATEGORY_COLORS: Record<string, { border: string; bg: string; text: string; badge: string; gradient: string }> = {
     'bp-blue': { border: 'border-violet-500/20', bg: 'bg-violet-500/5', text: 'text-violet-400', badge: 'bg-violet-500/10 text-violet-400 border-violet-500/20', gradient: 'from-violet-500 to-cyan-500' },
     'bp-red': { border: 'border-rose-500/20', bg: 'bg-rose-500/5', text: 'text-rose-400', badge: 'bg-rose-500/10 text-rose-400 border-rose-500/20', gradient: 'from-rose-500 to-orange-500' },
     'bp-green': { border: 'border-emerald-500/20', bg: 'bg-emerald-500/5', text: 'text-emerald-400', badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', gradient: 'from-emerald-500 to-teal-500' },
     'bp-steel': { border: 'border-cyan-500/20', bg: 'bg-cyan-500/5', text: 'text-cyan-400', badge: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20', gradient: 'from-cyan-500 to-blue-500' },
+    'bp-indigo': { border: 'border-indigo-500/20', bg: 'bg-indigo-500/5', text: 'text-indigo-400', badge: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', gradient: 'from-indigo-500 to-violet-500' },
     'bp-amber': { border: 'border-amber-500/20', bg: 'bg-amber-500/5', text: 'text-amber-400', badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20', gradient: 'from-amber-500 to-yellow-500' },
 };
 
@@ -35,6 +37,7 @@ export function IconPackageGrid({
     onSelectAll,
     onSelectEssential,
     onDownloadPng,
+    onDownloadCategory,
 }: IconPackageGridProps) {
     const [collapsedCategories, setCollapsedCategories] = useState<Set<IconCategory>>(new Set());
 
@@ -132,6 +135,19 @@ export function IconPackageGrid({
                                 >
                                     {allSelected ? 'Deselect' : 'Select All'}
                                 </button>
+                                {onDownloadCategory && selectedInCat > 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onDownloadCategory(category);
+                                        }}
+                                        className={`flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border transition-all ${colors.badge} hover:opacity-80`}
+                                        title={`Download ${meta.label} package as ZIP`}
+                                    >
+                                        <FiDownload className="w-3 h-3" /> ZIP
+                                    </button>
+                                )}
                             </div>
                         </div>
 

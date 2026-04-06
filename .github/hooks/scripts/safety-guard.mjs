@@ -9,7 +9,7 @@
  * - Dropping database tables/schemas
  * - Deleting remote branches
  *
- * Location: .github_portable/hooks/scripts/safety-guard.mjs
+ * Location: .github/hooks/scripts/safety-guard.mjs
  * Hook event: PreToolUse
  */
 

@@ -57,8 +57,9 @@ export function SupportLinks() {
                 </span>
               </div>
               <p className="text-[11px] text-zinc-600 leading-relaxed max-w-xs">
-                Free, open-source favicon generator. Drag an image, preview in every context,
-                and download a complete icon package — all in your browser.
+                Free, open-source favicon generator and ICO converter. Convert PNG, SVG, JPG, WebP
+                to multi-size .ico files. Generate Apple Touch Icons, PWA icons, MSIX Store assets,
+                and Open Graph images — entirely in your browser.
               </p>
             </div>
 

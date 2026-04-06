@@ -2,7 +2,7 @@
  * SessionStart hook — injects project context into every agent session.
  * Auto-detects the project stack and outputs branch info + critical rules.
  *
- * Location: .github_portable/hooks/scripts/session-context.mjs
+ * Location: .github/hooks/scripts/session-context.mjs
  * Hook event: SessionStart
  */
 
