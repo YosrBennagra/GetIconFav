@@ -6,7 +6,7 @@
  * additional context. It does not run lint automatically (too slow per-edit),
  * but ensures the agent does not forget.
  *
- * Location: .github_portable/hooks/scripts/quality-gate.mjs
+ * Location: .github/hooks/scripts/quality-gate.mjs
  * Hook event: PostToolUse
  */
 

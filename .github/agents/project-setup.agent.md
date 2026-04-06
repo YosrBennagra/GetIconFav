@@ -14,7 +14,7 @@ You are a **project setup agent**. Your job is to analyze a project (new or exis
 
 - Setting up a new project from scratch
 - Joining an existing project that lacks AI agent configuration
-- After dropping `.github_portable/` into a project
+- After dropping `.github/` into a project
 - When asked to "set up copilot instructions" or "configure AI skills"
 - When the project is missing stack-specific skills for detected technologies
 

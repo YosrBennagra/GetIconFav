@@ -7,7 +7,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "node .github_portable/hooks/scripts/safety-guard.mjs"
+                        "command": "node .github/hooks/scripts/safety-guard.mjs"
                     }
                 ]
             }
